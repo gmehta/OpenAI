@@ -175,7 +175,22 @@
           <div class="legend-row"><span class="legend-swatch ai-native"></span> AI-native internal tool</div>
           <div class="legend-row"><span class="legend-swatch unconfirmed"></span> JD category — vendor unconfirmed</div>
         </div>
+        <p class="stack-hint">Pan and zoom the diagram. Click any system or connection row to highlight arrows and endpoints.</p>
         <div id="gtm-stack-cy"></div>
+      </div>
+
+      <div class="stack-connections">
+        <div class="conn-panel">
+          <h3 class="conn-title">Selected system</h3>
+          <div id="stack-connections-body">
+            <p class="conn-hint">Click a system node or a row below to highlight its connections on the diagram.</p>
+          </div>
+        </div>
+        <div class="conn-panel conn-panel-wide">
+          <h3 class="conn-title">All data flows</h3>
+          <input class="conn-filter" id="stack-conn-filter" type="search" placeholder="Filter connections…" aria-label="Filter connections">
+          <ul class="conn-index" id="stack-connections-index"></ul>
+        </div>
       </div>
 
       <div class="org-note" id="org-note"></div>

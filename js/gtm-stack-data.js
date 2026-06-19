@@ -1,6 +1,6 @@
 /* OpenAI GTM Stack v2 — graph data extracted from openai-gtm-stack-v2.drawio */
 (function (root) {
-  var S = 0.72;
+  var S = 0.85;
 
   function center(x, y, w, h) {
     return { x: (x + w / 2) * S, y: (y + h / 2) * S };
@@ -99,6 +99,23 @@
     return n.label + '\n' + n.sub;
   }
 
+  var nodeNameById = {};
+  nodes.forEach(function (n) { nodeNameById[n.id] = n.label; });
+
+  function edgeEndpoints(sourceId, targetId) {
+    var src = nodes.find(function (n) { return n.id === sourceId; });
+    var tgt = nodes.find(function (n) { return n.id === targetId; });
+    if (!src || !tgt) return { taxi: 'vertical' };
+    var sx = src.geom[0] + src.geom[2] / 2;
+    var sy = src.geom[1] + src.geom[3] / 2;
+    var tx = tgt.geom[0] + tgt.geom[2] / 2;
+    var ty = tgt.geom[1] + tgt.geom[3] / 2;
+    var dx = tx - sx;
+    var dy = ty - sy;
+    if (Math.abs(dy) <= 40 && Math.abs(dx) > 80) return { taxi: 'horizontal' };
+    return { taxi: 'vertical' };
+  }
+
   function buildElements() {
     var elements = [];
 
@@ -138,7 +155,8 @@
       });
     });
 
-    edges.forEach(function (e) {
+    edges.forEach(function (e, i) {
+      var routing = edgeEndpoints(e.source, e.target);
       elements.push({
         group: 'edges',
         data: {
@@ -146,7 +164,11 @@
           source: e.source,
           target: e.target,
           label: e.label,
-          edgeType: e.type
+          edgeType: e.type,
+          sourceName: nodeNameById[e.source],
+          targetName: nodeNameById[e.target],
+          taxi: routing.taxi,
+          spread: (i % 5) - 2
         },
         classes: 'edge-' + e.type
       });
@@ -161,6 +183,7 @@
     nodes: nodes,
     edges: edges,
     orgNote: orgNote,
+    nodeNameById: nodeNameById,
     buildElements: buildElements
   };
 })(typeof window !== 'undefined' ? window : globalThis);
