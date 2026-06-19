@@ -162,12 +162,13 @@
         <p class="stack-subtitle">Tools &amp; data flow · validated June 2026 · Nue + Ironclad confirmed, Outreach reframed as ecosystem signal</p>
       </div>
 
-      <div class="stack-wrap">
+      <div class="stack-wrap" id="stack-diagram-stage">
         <div class="stack-toolbar">
           <button class="stack-btn" id="stack-fit" type="button">Fit</button>
           <button class="stack-btn" id="stack-zoom-in" type="button">Zoom in</button>
           <button class="stack-btn" id="stack-zoom-out" type="button">Zoom out</button>
           <button class="stack-btn" id="stack-reset" type="button">Reset</button>
+          <button class="stack-btn stack-btn-fullscreen" id="stack-fullscreen" type="button" aria-pressed="false">Fullscreen</button>
         </div>
         <div class="stack-legend" aria-hidden="true">
           <div class="legend-row"><span class="legend-swatch confirmed"></span> Confirmed (OpenAI / vendor-stated)</div>
@@ -175,7 +176,7 @@
           <div class="legend-row"><span class="legend-swatch ai-native"></span> AI-native internal tool</div>
           <div class="legend-row"><span class="legend-swatch unconfirmed"></span> JD category — vendor unconfirmed</div>
         </div>
-        <p class="stack-hint">Pan and zoom the diagram. Click any system or connection row to highlight arrows and endpoints.</p>
+        <p class="stack-hint">Pan and zoom the diagram, or use Fullscreen for a larger view. Click any system or connection row to highlight arrows and endpoints.</p>
         <div id="gtm-stack-cy"></div>
       </div>
 

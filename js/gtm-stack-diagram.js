@@ -310,6 +310,59 @@
     });
   }
 
+  function bindFullscreen(cy) {
+    var stage = document.getElementById('stack-diagram-stage');
+    var btn = document.getElementById('stack-fullscreen');
+    if (!stage || !btn) return;
+
+    function isFullscreen() {
+      return document.fullscreenElement === stage ||
+        document.webkitFullscreenElement === stage;
+    }
+
+    function afterResize() {
+      requestAnimationFrame(function () {
+        cy.resize();
+        cy.fit(undefined, 56);
+      });
+    }
+
+    function setPressed(on) {
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.textContent = on ? 'Exit fullscreen' : 'Fullscreen';
+    }
+
+    function enterFullscreen() {
+      var req = stage.requestFullscreen || stage.webkitRequestFullscreen;
+      if (!req) {
+        btn.hidden = true;
+        return;
+      }
+      Promise.resolve(req.call(stage)).catch(function () {
+        setPressed(false);
+      });
+    }
+
+    function exitFullscreen() {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (exit) exit.call(document);
+    }
+
+    btn.addEventListener('click', function () {
+      if (isFullscreen()) exitFullscreen();
+      else enterFullscreen();
+    });
+
+    document.addEventListener('fullscreenchange', function () {
+      setPressed(isFullscreen());
+      afterResize();
+    });
+    document.addEventListener('webkitfullscreenchange', function () {
+      setPressed(isFullscreen());
+      afterResize();
+    });
+  }
+
   function bindControls(cy) {
     document.getElementById('stack-fit').addEventListener('click', function () {
       cy.fit(undefined, 48);
@@ -400,6 +453,7 @@
     }
 
     bindControls(cyInstance);
+    bindFullscreen(cyInstance);
 
     requestAnimationFrame(function () {
       cyInstance.resize();

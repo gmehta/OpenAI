@@ -432,6 +432,51 @@ li .n {
   border-bottom: 1px solid var(--line);
   background: var(--panel);
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.stack-btn-fullscreen {
+  margin-left: auto;
+}
+
+.stack-btn[aria-pressed="true"] {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.stack-wrap:fullscreen,
+.stack-wrap:-webkit-full-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.stack-wrap:fullscreen .stack-toolbar,
+.stack-wrap:-webkit-full-screen .stack-toolbar {
+  flex-shrink: 0;
+}
+
+.stack-wrap:fullscreen .stack-hint,
+.stack-wrap:-webkit-full-screen .stack-hint {
+  flex-shrink: 0;
+}
+
+.stack-wrap:fullscreen #gtm-stack-cy,
+.stack-wrap:-webkit-full-screen #gtm-stack-cy {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.stack-wrap:fullscreen .stack-legend,
+.stack-wrap:-webkit-full-screen .stack-legend {
+  top: 58px;
 }
 
 .stack-btn {
