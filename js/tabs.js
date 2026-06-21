@@ -13,6 +13,13 @@
       if (id === 'stack' && !stackInitialized && window.initGtmStackDiagram) {
         stackInitialized = true;
         window.initGtmStackDiagram();
+        requestAnimationFrame(function () {
+          var cyEl = document.getElementById('gtm-stack-cy');
+          if (cyEl && cyEl._cyreg && cyEl._cyreg.cy) {
+            cyEl._cyreg.cy.resize();
+            cyEl._cyreg.cy.fit(undefined, 48);
+          }
+        });
       }
     });
   });

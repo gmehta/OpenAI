@@ -32,8 +32,7 @@
           height: 'data(height)',
           'border-width': 2,
           padding: 8,
-          'z-index-compare': 'manual',
-          'z-index': 100
+          'z-index': 200
         }
       },
       {
@@ -50,7 +49,6 @@
           'text-halign': 'left',
           'text-margin-y': 10,
           'text-margin-x': 12,
-          'z-index-compare': 'manual',
           'z-index': 0
         }
       },
@@ -65,8 +63,7 @@
       {
         selector: 'node.system',
         style: {
-          'z-index-compare': 'manual',
-          'z-index': 200,
+          'z-index': 600,
           'text-outline-width': 0,
           'background-opacity': 1
         }
@@ -118,10 +115,8 @@
           'source-distance-from-node': 4,
           'target-distance-from-node': 4,
           'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.3,
+          'arrow-scale': 1.35,
           width: 4,
-          opacity: 1,
-          'line-opacity': 1,
           'line-cap': 'round',
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
@@ -133,10 +128,9 @@
           'text-border-width': 1,
           'text-border-color': '#D8DEDA',
           'text-border-opacity': 1,
-          'z-index-compare': 'manual',
-          'z-index': 50,
-          'underlay-padding': 6,
-          'underlay-opacity': 0.95,
+          'z-index': 400,
+          'underlay-padding': 4,
+          'underlay-opacity': 0.85,
           'underlay-color': '#FFFFFF'
         }
       },
@@ -147,8 +141,6 @@
           'target-arrow-color': '#1A7F64',
           color: '#0B3D2E',
           width: 4,
-          opacity: 1,
-          'line-opacity': 1,
           'line-style': 'solid'
         }
       },
@@ -159,8 +151,6 @@
           'target-arrow-color': '#13855F',
           color: '#0B3D2E',
           width: 3.5,
-          opacity: 1,
-          'line-opacity': 1,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -171,9 +161,7 @@
           'line-color': '#C8911A',
           'target-arrow-color': '#C8911A',
           color: '#7A5E12',
-          width: 3.5,
-          opacity: 1,
-          'line-opacity': 1,
+          width: 3,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -184,9 +172,7 @@
           'line-color': '#757575',
           'target-arrow-color': '#757575',
           color: '#555555',
-          width: 3,
-          opacity: 1,
-          'line-opacity': 1,
+          width: 2.5,
           'line-style': 'dashed',
           'line-dash-pattern': [4, 4]
         }
@@ -194,23 +180,18 @@
       {
         selector: 'edge.highlighted',
         style: {
-          width: 7,
-          opacity: 1,
-          'line-opacity': 1,
-          'arrow-scale': 1.7,
-          'z-index-compare': 'manual',
-          'z-index': 300,
+          width: 6,
+          'arrow-scale': 1.6,
+          'z-index': 900,
           'font-size': 11,
-          'text-background-color': '#FFF8E1',
-          'underlay-opacity': 1
+          'text-background-color': '#FFF8E1'
         }
       },
       {
         selector: 'edge.edge-hovered',
         style: {
           width: 5,
-          'z-index-compare': 'manual',
-          'z-index': 250,
+          'z-index': 700,
           'text-background-color': '#F4FBF8'
         }
       },
@@ -459,12 +440,10 @@
     buildConnectionIndex();
 
     cyInstance.on('tap', 'node.system', function (evt) {
-      evt.stopPropagation();
       focusNode(cyInstance, evt.target);
     });
 
     cyInstance.on('tap', 'edge', function (evt) {
-      evt.stopPropagation();
       focusEdge(cyInstance, evt.target);
     });
 
