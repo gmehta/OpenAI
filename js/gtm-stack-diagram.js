@@ -1,6 +1,8 @@
 (function () {
   var cyInstance = null;
+  var focusActive = false;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var connHint = 'All connections are shown by default — click a system to emphasize its flows.';
 
   var nodeStyles = {
     confirmed: { 'background-color': '#E6F4EE', 'border-color': '#1A7F64', color: '#0B3D2E' },
@@ -30,7 +32,7 @@
           height: 'data(height)',
           'border-width': 2,
           padding: 8,
-          'z-index': 200
+          'z-index': 10
         }
       },
       {
@@ -61,7 +63,7 @@
       {
         selector: 'node.system',
         style: {
-          'z-index': 300,
+          'z-index': 10,
           'text-outline-width': 0,
           'background-opacity': 1
         }
@@ -113,8 +115,9 @@
           'source-distance-from-node': 4,
           'target-distance-from-node': 4,
           'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.35,
-          width: 3.5,
+          'arrow-scale': 1.2,
+          width: 3,
+          opacity: 1,
           'line-cap': 'round',
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
@@ -126,9 +129,9 @@
           'text-border-width': 1,
           'text-border-color': '#D8DEDA',
           'text-border-opacity': 1,
-          'z-index': 500,
-          'underlay-padding': 4,
-          'underlay-opacity': 0.85,
+          'z-index': 1000,
+          'underlay-padding': 5,
+          'underlay-opacity': 0.9,
           'underlay-color': '#FFFFFF'
         }
       },
@@ -138,7 +141,8 @@
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
           color: '#0B3D2E',
-          width: 3.5,
+          width: 3,
+          opacity: 1,
           'line-style': 'solid'
         }
       },
@@ -149,6 +153,7 @@
           'target-arrow-color': '#13855F',
           color: '#0B3D2E',
           width: 3,
+          opacity: 1,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -160,6 +165,7 @@
           'target-arrow-color': '#C8911A',
           color: '#7A5E12',
           width: 3,
+          opacity: 1,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -171,6 +177,7 @@
           'target-arrow-color': '#757575',
           color: '#555555',
           width: 2.5,
+          opacity: 1,
           'line-style': 'dashed',
           'line-dash-pattern': [4, 4]
         }
@@ -179,19 +186,29 @@
         selector: 'edge.highlighted',
         style: {
           width: 6,
+          opacity: 1,
           'arrow-scale': 1.6,
-          'z-index': 900,
+          'z-index': 2000,
           'font-size': 11,
-          'text-background-color': '#FFF8E1'
+          'text-background-color': '#FFF8E1',
+          'underlay-opacity': 1
+        }
+      },
+      {
+        selector: 'edge.edge-hovered',
+        style: {
+          width: 4.5,
+          'z-index': 1500,
+          'text-background-color': '#F4FBF8'
         }
       },
       {
         selector: 'edge.dimmed',
-        style: { opacity: 0.08 }
+        style: { opacity: 0.45, width: 2 }
       },
       {
         selector: 'node.dimmed',
-        style: { opacity: 0.25 }
+        style: { opacity: 0.55 }
       },
       {
         selector: 'node.highlighted',
@@ -205,11 +222,14 @@
   }
 
   function clearFocus(cy) {
-    cy.elements().removeClass('dimmed highlighted selected');
+    focusActive = false;
+    cy.elements().removeClass('dimmed highlighted selected edge-hovered');
+    cy.edges().removeClass('highlighted edge-hovered');
   }
 
   function focusEdge(cy, edge) {
     clearFocus(cy);
+    focusActive = true;
     var hood = edge.connectedNodes().union(edge);
     cy.elements().addClass('dimmed');
     hood.removeClass('dimmed').addClass('highlighted');
@@ -219,6 +239,7 @@
   function focusNode(cy, node) {
     if (node.data('kind') === 'swimlane') return;
     clearFocus(cy);
+    focusActive = true;
     node.addClass('selected');
     var hood = node.closedNeighborhood();
     cy.elements().addClass('dimmed');
@@ -377,7 +398,7 @@
       clearFocus(cy);
       cy.fit(undefined, 48);
       document.getElementById('stack-connections-body').innerHTML =
-        '<p class="conn-hint">Click a system node or a row below to highlight its connections on the diagram.</p>';
+        '<p class="conn-hint">' + connHint + '</p>';
     });
 
     var filter = document.getElementById('stack-conn-filter');
@@ -422,6 +443,7 @@
     cyInstance.nodes('[shape = "barrel"]').addClass('barrel');
     cyInstance.nodes('.swimlane').ungrabify().unselectify().lock();
     spreadHubEdges(cyInstance);
+    cyInstance.edges().raise();
     initialViewport(cyInstance, container);
     buildConnectionIndex();
 
@@ -437,18 +459,16 @@
       if (evt.target === cyInstance) {
         clearFocus(cyInstance);
         document.getElementById('stack-connections-body').innerHTML =
-          '<p class="conn-hint">Click a system node or a row below to highlight its connections on the diagram.</p>';
+          '<p class="conn-hint">' + connHint + '</p>';
       }
     });
 
     if (!reducedMotion) {
       cyInstance.on('mouseover', 'edge', function (evt) {
-        evt.target.addClass('highlighted');
+        if (!focusActive) evt.target.addClass('edge-hovered');
       });
       cyInstance.on('mouseout', 'edge', function (evt) {
-        if (!cyInstance.$('edge:selected, node:selected').length) {
-          evt.target.removeClass('highlighted');
-        }
+        evt.target.removeClass('edge-hovered');
       });
     }
 
