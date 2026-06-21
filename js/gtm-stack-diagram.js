@@ -90,10 +90,11 @@
       {
         selector: 'node.selected',
         style: {
-          'border-width': 4,
+          'border-width': 5,
           'overlay-color': '#0E5C46',
-          'overlay-opacity': 0.12,
-          'overlay-padding': 6
+          'overlay-opacity': 0.18,
+          'overlay-padding': 8,
+          'z-index': 800
         }
       },
       {
@@ -115,8 +116,10 @@
           'source-distance-from-node': 4,
           'target-distance-from-node': 4,
           'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.35,
-          width: 4,
+          'arrow-scale': 1.4,
+          width: 4.5,
+          opacity: 1,
+          'line-opacity': 1,
           'line-cap': 'round',
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
@@ -140,7 +143,7 @@
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
           color: '#0B3D2E',
-          width: 4,
+          width: 4.5,
           'line-style': 'solid'
         }
       },
@@ -150,7 +153,7 @@
           'line-color': '#13855F',
           'target-arrow-color': '#13855F',
           color: '#0B3D2E',
-          width: 3.5,
+          width: 4,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -161,7 +164,7 @@
           'line-color': '#C8911A',
           'target-arrow-color': '#C8911A',
           color: '#7A5E12',
-          width: 3,
+          width: 3.5,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -172,7 +175,7 @@
           'line-color': '#757575',
           'target-arrow-color': '#757575',
           color: '#555555',
-          width: 2.5,
+          width: 3,
           'line-style': 'dashed',
           'line-dash-pattern': [4, 4]
         }
@@ -180,11 +183,16 @@
       {
         selector: 'edge.highlighted',
         style: {
-          width: 6,
-          'arrow-scale': 1.6,
+          width: 7,
+          opacity: 1,
+          'line-opacity': 1,
+          'arrow-scale': 1.75,
           'z-index': 900,
           'font-size': 11,
-          'text-background-color': '#FFF8E1'
+          'font-weight': 700,
+          'text-background-color': '#FFF8E1',
+          'underlay-opacity': 1,
+          'underlay-padding': 6
         }
       },
       {
@@ -197,15 +205,15 @@
       },
       {
         selector: 'edge.dimmed',
-        style: { opacity: 0.45, width: 2 }
+        style: { opacity: 0.75, width: 3.5 }
       },
       {
         selector: 'node.dimmed',
-        style: { opacity: 0.55 }
+        style: { opacity: 0.8 }
       },
       {
         selector: 'node.highlighted',
-        style: { opacity: 1 }
+        style: { opacity: 1, 'z-index': 750 }
       },
       {
         selector: 'node:active',
@@ -237,6 +245,7 @@
     var hood = node.closedNeighborhood();
     cy.elements().addClass('dimmed');
     hood.removeClass('dimmed').addClass('highlighted');
+    hood.edges().addClass('highlighted');
     updateConnectionPanel(node);
   }
 
