@@ -15,7 +15,7 @@
     { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 280, w: 1500, h: 120, tone: 'neutral' },
     { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 420, w: 1500, h: 120, tone: 'neutral' },
     { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 560, w: 1500, h: 110, tone: 'crm' },
-    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 690, w: 1500, h: 210, tone: 'ai' },
+    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds · reported / directional)', x: 40, y: 690, w: 1500, h: 210, tone: 'ai' },
     { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 920, w: 1500, h: 120, tone: 'neutral' },
     { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1060, w: 1500, h: 130, tone: 'neutral' }
   ];
@@ -33,7 +33,7 @@
     { id: 'ch_prod', category: 'likely', geom: g(902, 150, 190, 85),
       label: 'Product partnerships', sub: 'Salesforce · Stripe · ZoomInfo (embed)' },
     { id: 'ch_apps', category: 'confirmed', geom: g(1110, 150, 190, 85),
-      label: 'App ecosystem', sub: 'ChatGPT Apps · GPT Store · Codex plugins' },
+      label: 'App ecosystem', sub: 'ChatGPT Apps (Apps SDK) · GPT Store · Codex plugins' },
     { id: 'ch_oem', category: 'likely', geom: g(1318, 150, 190, 85),
       label: 'Embedded / OEM', sub: 'Apple Intelligence · in-app models' },
 
@@ -45,13 +45,13 @@
     { id: 'zoominfo', category: 'likely', geom: g(810, 315, 260, 70),
       label: 'ZoomInfo', sub: 'B2B data / GTM context graph' },
     { id: 'codex', category: 'surface', geom: g(1170, 315, 260, 70),
-      label: 'Codex for Work', sub: 'Surface · Sales plugin · ZoomInfo + Clay apps' },
+      label: 'Codex for Work', sub: 'Surface · sales plugin · ZoomInfo + Clay apps (reported)' },
 
     /* Inbound AI */
     { id: 'inbound_ai', category: 'ai-native', geom: g(90, 455, 260, 70),
-      label: 'Inbound Sales Assistant', sub: 'internal "TailorAssist" · auto-responds, qualifies, hands off' },
+      label: 'Inbound Sales Assistant', sub: 'internal assistant (codename "TailorAssist", reported) · auto-responds, qualifies, hands off' },
     { id: 'clay', category: 'confirmed', geom: g(450, 455, 260, 70),
-      label: 'Clay', sub: 'Enrichment · account research (RevOps + Sales)' },
+      label: 'Clay', sub: 'Enrichment · account research (public OpenAI case study)' },
     { id: 'leandata', category: 'confirmed', geom: g(810, 455, 260, 70),
       label: 'LeanData', sub: 'Lead-to-account routing (native to Salesforce)' },
 
@@ -65,15 +65,15 @@
     { id: 'kb', category: 'ai-native', geom: g(100, 720, 240, 80), shape: 'barrel',
       label: 'Knowledge Base / Connectors', sub: 'Docs · policies · playbooks · customer stories' },
     { id: 'gtm_assistant', category: 'ai-native', geom: g(450, 720, 260, 70),
-      label: 'GTM Assistant', sub: 'Briefs · recaps · product Q&A · CRM writeback' },
+      label: 'GTM Assistant', sub: 'Briefs · recaps · product Q&A · CRM writeback (reported)' },
     { id: 'docugpt', category: 'ai-native', geom: g(810, 720, 260, 70),
-      label: 'DocuGPT', sub: 'Contracts → searchable structured data' },
+      label: 'DocuGPT', sub: 'Contracts → searchable structured data (reported)' },
     { id: 'slack', category: 'surface', geom: g(1170, 720, 260, 70),
       label: 'Slack', sub: 'Primary delivery surface' },
     { id: 'openai_core', category: 'platform', geom: g(100, 820, 970, 55),
-      label: 'OpenAI Models / API · AgentKit · internal Automation Platform · eval loops', sub: '' },
+      label: 'OpenAI Models / API · AgentKit (Agent Builder · Connectors · ChatKit) · Responses API · Agents SDK · Evals · MCP · internal Automation Platform', sub: '' },
     { id: 'symphony', category: 'ai-native', geom: g(1090, 818, 390, 62),
-      label: 'Symphony', sub: 'Agent orchestration · open-source control-plane spec · task board → agents · human review' },
+      label: 'Orchestration layer', sub: 'agent control-plane: task board → agents · human review (reported / interview-sourced; not a verified public artifact)' },
 
     /* Engagement */
     { id: 'gong', category: 'likely', geom: g(90, 955, 260, 70),
@@ -82,16 +82,16 @@
       label: 'Outreach', sub: 'Sales engagement · MCP Server ↔ ChatGPT (Feb 2026); internal use unconfirmed' },
 
     /* Quote-to-cash — drawio positions (no overlap) */
-    { id: 'nue', category: 'confirmed', geom: g(70, 1095, 250, 75),
-      label: 'Nue', sub: 'CPQ / lead-to-quote · Salesforce-native · subs + usage billing' },
+    { id: 'nue', category: 'likely', geom: g(70, 1095, 250, 75),
+      label: 'Nue', sub: 'CPQ / lead-to-quote · Salesforce-native (reported)' },
     { id: 'stripe', category: 'likely', geom: g(360, 1095, 250, 75),
       label: 'Stripe', sub: 'Payments rails · Agentic Commerce Protocol' },
     { id: 'snowflake', category: 'likely', geom: g(650, 1095, 250, 75),
       label: 'Snowflake', sub: 'Data Cloud / warehouse ($200M partnership)' },
     { id: 'attribution', category: 'unconfirmed', geom: g(940, 1095, 250, 75),
       label: 'Attribution', sub: 'JD category (vendor unconfirmed)' },
-    { id: 'ironclad', category: 'confirmed', geom: g(1230, 1095, 250, 75),
-      label: 'Ironclad', sub: 'Contract Lifecycle Mgmt (CLM) · eSign · Salesforce-integrated' }
+    { id: 'ironclad', category: 'likely', geom: g(1230, 1095, 250, 75),
+      label: 'Ironclad', sub: 'Contract Lifecycle Mgmt (CLM) · eSign · Salesforce-integrated (reported)' }
   ];
 
   var edges = [
@@ -118,7 +118,7 @@
     /* Core stack */
     { id: 'e1', source: 'inbound_demand', target: 'inbound_ai', label: 'inbound leads', type: 'confirmed',
       labelMy: -14, labelMx: -48, turn: 30 },
-    { id: 'e2', source: 'inbound_ai', target: 'salesforce', label: 'qualified handoff + writeback', type: 'confirmed',
+    { id: 'e2', source: 'inbound_ai', target: 'salesforce', label: 'qualified handoff + writeback', type: 'confirmed-dashed',
       labelMy: -16, labelMx: -62, turn: 44 },
     { id: 'e3', source: 'clay', target: 'salesforce', label: 'enrichment', type: 'confirmed',
       labelMy: -16, labelMx: -8, turn: 34 },
@@ -138,13 +138,13 @@
       labelMy: -10, labelMx: -68, turn: 30 },
     { id: 'e11', source: 'openai_core', target: 'docugpt', label: 'powers', type: 'confirmed',
       labelMy: -10, labelMx: 36, turn: 22 },
-    { id: 'e12', source: 'zoominfo', target: 'codex', label: 'native B2B data app', type: 'confirmed',
+    { id: 'e12', source: 'zoominfo', target: 'codex', label: 'native B2B data app (reported)', type: 'likely',
       labelMy: -16, labelMx: 0, turn: 20 },
     { id: 'e13', source: 'gtm_assistant', target: 'salesforce', label: 'CRM updates (piloting)', type: 'confirmed-dashed',
       labelMy: -14, labelMx: 64, turn: 42 },
-    { id: 'e_sfnue', source: 'salesforce', target: 'nue', label: 'lead-to-quote (CPQ)', type: 'confirmed',
+    { id: 'e_sfnue', source: 'salesforce', target: 'nue', label: 'lead-to-quote (CPQ)', type: 'likely',
       labelMy: 16, labelMx: -52, turn: 36 },
-    { id: 'e_nuestripe', source: 'nue', target: 'stripe', label: 'billing → payments', type: 'confirmed',
+    { id: 'e_nuestripe', source: 'nue', target: 'stripe', label: 'billing → payments', type: 'likely',
       labelMy: -16, labelMx: 0, turn: 18 },
     { id: 'e14', source: 'mktg', target: 'salesforce', label: 'marketing / sales sync', type: 'likely',
       labelMy: -18, labelMx: -78, turn: 52 },
@@ -171,14 +171,14 @@
     { id: 'e25', source: 'snowflake', target: 'attribution', label: 'models', type: 'unconfirmed',
       labelMy: -16, labelMx: 0, turn: 18 },
 
-    /* Symphony orchestration */
-    { id: 'e_sym_core', source: 'openai_core', target: 'symphony', label: 'runs on', type: 'confirmed',
+    /* Orchestration layer (reported) */
+    { id: 'e_sym_core', source: 'openai_core', target: 'symphony', label: 'runs on (reported)', type: 'likely',
       labelMy: -12, labelMx: 12, turn: 16 },
-    { id: 'e_sym_gtm', source: 'symphony', target: 'gtm_assistant', label: 'orchestrates', type: 'confirmed',
+    { id: 'e_sym_gtm', source: 'symphony', target: 'gtm_assistant', label: 'orchestrates (reported)', type: 'likely',
       labelMy: -14, labelMx: -38, turn: 24 },
-    { id: 'e_sym_doc', source: 'symphony', target: 'docugpt', label: 'orchestrates', type: 'confirmed',
+    { id: 'e_sym_doc', source: 'symphony', target: 'docugpt', label: 'orchestrates (reported)', type: 'likely',
       labelMy: -14, labelMx: 0, turn: 20 },
-    { id: 'e_sym_inb', source: 'symphony', target: 'inbound_ai', label: 'orchestrates', type: 'confirmed-dashed',
+    { id: 'e_sym_inb', source: 'symphony', target: 'inbound_ai', label: 'orchestrates (reported)', type: 'confirmed-dashed',
       labelMy: -14, labelMx: -55, turn: 32 }
   ];
 
