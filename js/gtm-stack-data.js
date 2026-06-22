@@ -1,12 +1,13 @@
 /* OpenAI GTM Stack v2 — graph data extracted from openai-gtm-stack-v2.drawio */
 (function (root) {
-  var S = 0.78;
-  var COL_W = 218;
-  var COL_GAP = 105;
-  var COL_X0 = 95;
-  var NODE_H = 66;
-  var ROW_GAP = 58;
-  var LANE_PAD = 52;
+  var S = 0.76;
+  var COL_W = 210;
+  var COL_GAP = 118;
+  var COL_X0 = 90;
+  var NODE_H = 64;
+  var ROW_GAP = 72;
+  var LANE_PAD = 54;
+  var BTM_W = 192;
 
   function colX(index) {
     return COL_X0 + index * (COL_W + COL_GAP);
@@ -17,12 +18,12 @@
   }
 
   var swimlanes = [
-    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 90, w: 1580, h: 140, tone: 'neutral' },
-    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 288, w: 1580, h: 140, tone: 'neutral' },
-    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 486, w: 1580, h: 130, tone: 'crm' },
-    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 674, w: 1580, h: 250, tone: 'ai' },
-    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 982, w: 1580, h: 140, tone: 'neutral' },
-    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1180, w: 1580, h: 150, tone: 'neutral' }
+    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 85, w: 1620, h: 148, tone: 'neutral' },
+    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 305, w: 1620, h: 148, tone: 'neutral' },
+    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 525, w: 1620, h: 138, tone: 'crm' },
+    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 735, w: 1620, h: 268, tone: 'ai' },
+    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 1075, w: 1620, h: 148, tone: 'neutral' },
+    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1295, w: 1620, h: 158, tone: 'neutral' }
   ];
 
   function laneNodeY(laneIndex) {
@@ -52,10 +53,10 @@
       geom: [colX(2), laneNodeY(1), COL_W, NODE_H],
       label: 'LeanData', sub: 'Lead-to-account routing (native to Salesforce)' },
     { id: 'salesforce', category: 'hub', panel: 'p3',
-      geom: [colX(1) - 40, laneNodeY(2), COL_W * 2 + COL_GAP + 80, NODE_H + 4],
+      geom: [colX(1) - 36, laneNodeY(2), COL_W * 2 + COL_GAP + 72, NODE_H + 6],
       label: 'Salesforce', sub: 'Core CRM · System of Record · (Agentforce 360 ↔ ChatGPT)' },
     { id: 'kb', category: 'ai-native', panel: 'p4',
-      geom: [colX(0), laneNodeY(3), COL_W, NODE_H + 8], shape: 'barrel',
+      geom: [colX(0), laneNodeY(3), COL_W, NODE_H + 6], shape: 'barrel',
       label: 'Knowledge Base / Connectors', sub: 'Docs · policies · playbooks · customer stories' },
     { id: 'gtm_assistant', category: 'ai-native', panel: 'p4',
       geom: [colX(1), laneNodeY(3), COL_W, NODE_H],
@@ -67,59 +68,87 @@
       geom: [colX(3), laneNodeY(3), COL_W, NODE_H],
       label: 'Slack', sub: 'Primary delivery surface' },
     { id: 'openai_core', category: 'platform', panel: 'p4',
-      geom: [colX(0), laneNodeY(3) + NODE_H + 36, COL_W * 3 + COL_GAP * 2, 54],
+      geom: [colX(0), laneNodeY(3) + NODE_H + 44, COL_W * 3 + COL_GAP * 2, 52],
       label: 'OpenAI Models / API · AgentKit · internal Automation Platform · eval loops', sub: '' },
     { id: 'gong', category: 'likely', panel: 'p5',
       geom: [colX(0), laneNodeY(4), COL_W, NODE_H],
       label: 'Gong', sub: 'Conversation intelligence · call notes (inferred)' },
     { id: 'outreach', category: 'likely', panel: 'p5',
-      geom: [colX(1), laneNodeY(4), COL_W + 20, NODE_H],
+      geom: [colX(1), laneNodeY(4), COL_W + 16, NODE_H],
       label: 'Outreach', sub: 'Sales engagement · MCP Server ↔ ChatGPT (Feb 2026); internal use unconfirmed' },
     { id: 'nue', category: 'confirmed', panel: 'p6',
-      geom: [colX(0) - 10, laneNodeY(5), 200, NODE_H + 6],
+      geom: [colX(0), laneNodeY(5), BTM_W, NODE_H + 4],
       label: 'Nue', sub: 'CPQ / lead-to-quote · Salesforce-native · subs + usage billing' },
     { id: 'stripe', category: 'likely', panel: 'p6',
-      geom: [colX(0) + 200 + 72, laneNodeY(5), 200, NODE_H + 6],
+      geom: [colX(1), laneNodeY(5), BTM_W, NODE_H + 4],
       label: 'Stripe', sub: 'Payments rails · Agentic Commerce Protocol' },
     { id: 'snowflake', category: 'likely', panel: 'p6',
-      geom: [colX(1), laneNodeY(5), 200, NODE_H + 6],
+      geom: [colX(2), laneNodeY(5), BTM_W, NODE_H + 4],
       label: 'Snowflake', sub: 'Data Cloud / warehouse ($200M partnership)' },
     { id: 'attribution', category: 'unconfirmed', panel: 'p6',
-      geom: [colX(2), laneNodeY(5), 200, NODE_H + 6],
+      geom: [colX(3), laneNodeY(5), BTM_W, NODE_H + 4],
       label: 'Attribution', sub: 'JD category (vendor unconfirmed)' },
     { id: 'ironclad', category: 'confirmed', panel: 'p6',
-      geom: [colX(3), laneNodeY(5), 200, NODE_H + 6],
+      geom: [colX(4), laneNodeY(5), BTM_W, NODE_H + 4],
       label: 'Ironclad', sub: 'Contract Lifecycle Mgmt (CLM) · eSign · Salesforce-integrated' }
   ];
 
+  /* labelMy / labelMx nudge edge labels; turn spreads taxi routing */
   var edges = [
-    { id: 'e1', source: 'inbound_demand', target: 'inbound_ai', label: 'inbound leads', type: 'confirmed' },
-    { id: 'e2', source: 'inbound_ai', target: 'salesforce', label: 'qualified handoff + writeback', type: 'confirmed' },
-    { id: 'e3', source: 'clay', target: 'salesforce', label: 'enrichment', type: 'confirmed' },
-    { id: 'e4', source: 'leandata', target: 'salesforce', label: 'lead-to-account routing', type: 'confirmed' },
-    { id: 'e5', source: 'salesforce', target: 'gtm_assistant', label: 'account history + SFDC activity', type: 'confirmed' },
-    { id: 'e6', source: 'kb', target: 'gtm_assistant', label: 'product Q&A grounding', type: 'confirmed' },
-    { id: 'e7', source: 'kb', target: 'inbound_ai', label: 'connector grounding', type: 'confirmed' },
-    { id: 'e8', source: 'gtm_assistant', target: 'slack', label: 'delivers in', type: 'confirmed' },
-    { id: 'e9', source: 'openai_core', target: 'gtm_assistant', label: 'powers', type: 'confirmed' },
-    { id: 'e10', source: 'openai_core', target: 'inbound_ai', label: 'powers', type: 'confirmed' },
-    { id: 'e11', source: 'openai_core', target: 'docugpt', label: 'powers', type: 'confirmed' },
-    { id: 'e12', source: 'zoominfo', target: 'codex', label: 'native B2B data app', type: 'confirmed' },
-    { id: 'e13', source: 'gtm_assistant', target: 'salesforce', label: 'CRM updates (piloting)', type: 'confirmed-dashed' },
-    { id: 'e_sfnue', source: 'salesforce', target: 'nue', label: 'lead-to-quote (CPQ)', type: 'confirmed' },
-    { id: 'e_nuestripe', source: 'nue', target: 'stripe', label: 'billing → payments', type: 'confirmed' },
-    { id: 'e14', source: 'mktg', target: 'salesforce', label: 'marketing / sales sync', type: 'likely' },
-    { id: 'e15', source: 'zoominfo', target: 'clay', label: 'data source', type: 'likely' },
-    { id: 'e16', source: 'gong', target: 'gtm_assistant', label: 'call notes', type: 'likely' },
-    { id: 'e17', source: 'gong', target: 'snowflake', label: 'call data', type: 'likely' },
-    { id: 'e18', source: 'salesforce', target: 'snowflake', label: 'data movement', type: 'likely' },
-    { id: 'e19', source: 'mktg', target: 'snowflake', label: 'marketing data', type: 'likely' },
-    { id: 'e20', source: 'stripe', target: 'snowflake', label: 'billing data', type: 'likely' },
-    { id: 'e21', source: 'docugpt', target: 'snowflake', label: 'structured contract data', type: 'likely' },
-    { id: 'e_ironsf', source: 'ironclad', target: 'salesforce', label: 'CLM native integration', type: 'likely' },
-    { id: 'e_irondoc', source: 'ironclad', target: 'docugpt', label: 'signed contracts → extraction (inferred)', type: 'likely' },
-    { id: 'e_outsf', source: 'outreach', target: 'salesforce', label: 'activity logging (via MCP)', type: 'likely' },
-    { id: 'e25', source: 'snowflake', target: 'attribution', label: 'models', type: 'unconfirmed' }
+    { id: 'e1', source: 'inbound_demand', target: 'inbound_ai', label: 'inbound leads', type: 'confirmed',
+      labelMy: -14, labelMx: -48, turn: 30 },
+    { id: 'e2', source: 'inbound_ai', target: 'salesforce', label: 'qualified handoff + writeback', type: 'confirmed',
+      labelMy: -16, labelMx: -62, turn: 44 },
+    { id: 'e3', source: 'clay', target: 'salesforce', label: 'enrichment', type: 'confirmed',
+      labelMy: -16, labelMx: -8, turn: 34 },
+    { id: 'e4', source: 'leandata', target: 'salesforce', label: 'lead-to-account routing', type: 'confirmed',
+      labelMy: -16, labelMx: 52, turn: 28 },
+    { id: 'e5', source: 'salesforce', target: 'gtm_assistant', label: 'account history + SFDC activity', type: 'confirmed',
+      labelMy: 14, labelMx: -58, turn: 38 },
+    { id: 'e6', source: 'kb', target: 'gtm_assistant', label: 'product Q&A grounding', type: 'confirmed',
+      labelMy: -14, labelMx: 8, turn: 26 },
+    { id: 'e7', source: 'kb', target: 'inbound_ai', label: 'connector grounding', type: 'confirmed',
+      labelMy: -12, labelMx: -42, turn: 36 },
+    { id: 'e8', source: 'gtm_assistant', target: 'slack', label: 'delivers in', type: 'confirmed',
+      labelMy: -16, labelMx: 10, turn: 24 },
+    { id: 'e9', source: 'openai_core', target: 'gtm_assistant', label: 'powers', type: 'confirmed',
+      labelMy: -10, labelMx: -38, turn: 22 },
+    { id: 'e10', source: 'openai_core', target: 'inbound_ai', label: 'powers', type: 'confirmed',
+      labelMy: -10, labelMx: -68, turn: 30 },
+    { id: 'e11', source: 'openai_core', target: 'docugpt', label: 'powers', type: 'confirmed',
+      labelMy: -10, labelMx: 36, turn: 22 },
+    { id: 'e12', source: 'zoominfo', target: 'codex', label: 'native B2B data app', type: 'confirmed',
+      labelMy: -16, labelMx: 0, turn: 20 },
+    { id: 'e13', source: 'gtm_assistant', target: 'salesforce', label: 'CRM updates (piloting)', type: 'confirmed-dashed',
+      labelMy: -14, labelMx: 64, turn: 42 },
+    { id: 'e_sfnue', source: 'salesforce', target: 'nue', label: 'lead-to-quote (CPQ)', type: 'confirmed',
+      labelMy: 16, labelMx: -52, turn: 36 },
+    { id: 'e_nuestripe', source: 'nue', target: 'stripe', label: 'billing → payments', type: 'confirmed',
+      labelMy: -16, labelMx: 0, turn: 18 },
+    { id: 'e14', source: 'mktg', target: 'salesforce', label: 'marketing / sales sync', type: 'likely',
+      labelMy: -18, labelMx: -78, turn: 52 },
+    { id: 'e15', source: 'zoominfo', target: 'clay', label: 'data source', type: 'likely',
+      labelMy: 16, labelMx: 0, turn: 20 },
+    { id: 'e16', source: 'gong', target: 'gtm_assistant', label: 'call notes', type: 'likely',
+      labelMy: -14, labelMx: -44, turn: 34 },
+    { id: 'e17', source: 'gong', target: 'snowflake', label: 'call data', type: 'likely',
+      labelMy: -14, labelMx: -36, turn: 40 },
+    { id: 'e18', source: 'salesforce', target: 'snowflake', label: 'data movement', type: 'likely',
+      labelMy: 16, labelMx: 48, turn: 38 },
+    { id: 'e19', source: 'mktg', target: 'snowflake', label: 'marketing data', type: 'likely',
+      labelMy: -12, labelMx: -32, turn: 48 },
+    { id: 'e20', source: 'stripe', target: 'snowflake', label: 'billing data', type: 'likely',
+      labelMy: -16, labelMx: 8, turn: 22 },
+    { id: 'e21', source: 'docugpt', target: 'snowflake', label: 'structured contract data', type: 'likely',
+      labelMy: -12, labelMx: 42, turn: 44 },
+    { id: 'e_ironsf', source: 'ironclad', target: 'salesforce', label: 'CLM native integration', type: 'likely',
+      labelMy: -16, labelMx: 58, turn: 46 },
+    { id: 'e_irondoc', source: 'ironclad', target: 'docugpt', label: 'signed contracts → extraction (inferred)', type: 'likely',
+      labelMy: -14, labelMx: 24, turn: 32 },
+    { id: 'e_outsf', source: 'outreach', target: 'salesforce', label: 'activity logging (via MCP)', type: 'likely',
+      labelMy: -14, labelMx: 38, turn: 40 },
+    { id: 'e25', source: 'snowflake', target: 'attribution', label: 'models', type: 'unconfirmed',
+      labelMy: -16, labelMx: 0, turn: 18 }
   ];
 
   var orgNote = 'The GTM Systems team, led by Keith Jones (Head of GTM Systems), owns Salesforce + integrations + the agent layer, treating Sales / RevOps as its internal end-users. Reportedly consolidated under a single Finance budget line for headcount / cost alignment (per interview — not independently verified).';
@@ -142,7 +171,7 @@
     var ty = tgt.geom[1] + tgt.geom[3] / 2;
     var dx = tx - sx;
     var dy = ty - sy;
-    if (Math.abs(dy) <= 55 && Math.abs(dx) > 90) return { taxi: 'horizontal' };
+    if (Math.abs(dy) <= 60 && Math.abs(dx) > 100) return { taxi: 'horizontal' };
     return { taxi: 'vertical' };
   }
 
@@ -184,7 +213,7 @@
       });
     });
 
-    edges.forEach(function (e, i) {
+    edges.forEach(function (e) {
       var routing = edgeEndpoints(e.source, e.target);
       elements.push({
         group: 'edges',
@@ -197,7 +226,9 @@
           sourceName: nodeNameById[e.source],
           targetName: nodeNameById[e.target],
           taxi: routing.taxi,
-          spread: (i % 5) - 2
+          labelMy: e.labelMy != null ? e.labelMy : -12,
+          labelMx: e.labelMx != null ? e.labelMx : 0,
+          taxiTurn: e.turn != null ? e.turn : 32
         },
         classes: 'edge-' + e.type
       });

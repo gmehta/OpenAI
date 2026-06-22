@@ -108,12 +108,13 @@
           'font-weight': 600,
           'font-family': 'ui-monospace, monospace',
           'text-rotation': 'autorotate',
-          'text-margin-y': -10,
+          'text-margin-y': 'data(labelMy)',
+          'text-margin-x': 'data(labelMx)',
           'curve-style': 'taxi',
           'taxi-direction': 'data(taxi)',
-          'taxi-turn': 32,
-          'taxi-turn-min-distance': 14,
-          'taxi-radius': 10,
+          'taxi-turn': 'data(taxiTurn)',
+          'taxi-turn-min-distance': 18,
+          'taxi-radius': 12,
           'source-endpoint': 'outside-to-node',
           'target-endpoint': 'outside-to-node',
           'source-distance-from-node': 8,
@@ -129,9 +130,9 @@
           color: '#0B3D2E',
           'text-background-color': '#FFFFFF',
           'text-background-opacity': 1,
-          'text-background-padding': 4,
+          'text-background-padding': 6,
           'text-background-shape': 'roundrectangle',
-          'text-border-width': 1,
+          'text-border-width': 1.5,
           'text-border-color': '#D8DEDA',
           'text-border-opacity': 1,
           'z-index': 400,
@@ -320,20 +321,25 @@
   }
 
   function spreadHubEdges(cy) {
-    var bySource = {};
-    cy.edges().forEach(function (edge) {
-      var src = edge.source().id();
-      bySource[src] = bySource[src] || [];
-      bySource[src].push(edge);
-    });
-    Object.keys(bySource).forEach(function (srcId) {
-      var group = bySource[srcId];
-      if (group.length < 2) return;
-      group.forEach(function (edge, i) {
-        var spread = (i - (group.length - 1) / 2) * 18;
-        edge.style('taxi-turn', 24 + Math.abs(spread));
+    ['source', 'target'].forEach(function (key) {
+      var groups = {};
+      cy.edges().forEach(function (edge) {
+        var id = edge[key]().id();
+        groups[id] = groups[id] || [];
+        groups[id].push(edge);
+      });
+      Object.keys(groups).forEach(function (nodeId) {
+        var group = groups[nodeId];
+        if (group.length < 2) return;
+        group.sort(function (a, b) { return a.id().localeCompare(b.id()); });
+        group.forEach(function (edge, i) {
+          var base = edge.data('taxiTurn') || 32;
+          var spread = (i - (group.length - 1) / 2) * 14;
+          edge.data('taxiTurn', base + Math.abs(spread));
+        });
       });
     });
+    cy.style().update();
   }
 
   function bindFullscreen(cy) {
