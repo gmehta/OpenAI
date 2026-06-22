@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenAI GTM Operating Map</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E5C46'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='17' font-weight='700' text-anchor='middle' fill='%23fff'%3EG%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/styles.css">
   <style>
     /* ---- Operating map v2: clubbed segment × lifecycle model ---- */
@@ -132,14 +133,14 @@
 
     <div class="slide panel-view" id="map">
       <p class="eyebrow">OpenAI · GTM operating map · June 2026</p>
-      <h1 class="title">OpenAI doesn&#8217;t run a motion per SKU. It runs <em>~20 clubbed motion templates</em> &mdash; that each explode at the instance level.</h1>
+      <h1 class="title">OpenAI doesn&#8217;t run a motion per SKU. Model it as <em>~20 clubbed motion templates</em> &mdash; that each explode at the instance level.</h1>
 
-      <p class="om-lede">A naive read multiplies <b>products &times; actions</b> &mdash; but &ldquo;Free&#8594;Paid&rdquo; doesn&#8217;t apply to the API, &ldquo;seat expansion&rdquo; doesn&#8217;t apply to ChatGPT Free, and &ldquo;Connect with Sales&rdquo; doesn&#8217;t apply to a $20 Plus user. In reality the team <em>clubs</em> the 14 actions into <b>4 lifecycle stages</b> and the 28 products into <b>5 customer segments</b>. A &ldquo;motion&rdquo; is a <b>segment &times; lifecycle</b> play, instantiated across whatever products live in that segment. That keeps the <em>template</em> count small and stable &mdash; while the <em>instance</em> count is what runs away.</p>
+      <p class="om-lede">A naive read multiplies <b>products &times; actions</b> &mdash; but &ldquo;Free&#8594;Paid&rdquo; doesn&#8217;t apply to the API, &ldquo;seat expansion&rdquo; doesn&#8217;t apply to ChatGPT Free, and &ldquo;Connect with Sales&rdquo; doesn&#8217;t apply to a $20 Plus user. A more defensible read <em>clubs</em> the 14 actions into <b>4 lifecycle stages</b> and the 28+ products, surfaces &amp; plans into <b>5 customer segments</b>. A &ldquo;motion&rdquo; is a <b>segment &times; lifecycle</b> play, instantiated across whatever lives in that segment. That keeps the <em>template</em> count small and stable &mdash; while the <em>instance</em> count is what runs away. <em>(This is my working model &mdash; OpenAI publishes no official motion count.)</em></p>
 
       <div class="om-two">
         <!-- LEFT: the clubbed templates (stable layer) -->
         <div class="om-panel">
-          <p class="om-kicker">The stable layer &mdash; what the team actually runs</p>
+          <p class="om-kicker">The stable layer &mdash; my working model</p>
           <div class="om-panel-h">
             <div class="om-count">~20</div>
             <div class="om-count-lab">clubbed motion templates<br>5 customer segments &times; 4 lifecycle stages</div>
@@ -154,9 +155,9 @@
             <div class="om-colh">Retain &amp; Renew</div>
 
             <!-- Consumer -->
-            <div class="om-rowlab">Consumer<small>Free·Go·Plus·Pro — PLG / ads</small></div>
+            <div class="om-rowlab">Consumer<small>Free·Go·Plus·Pro — PLG / ads-eligible</small></div>
             <div class="om-cell">First-time use &#8594; first value</div>
-            <div class="om-cell">Free&#8594;Go&#8594;Plus&#8594;Pro · ads on free</div>
+            <div class="om-cell">Free&#8594;Go&#8594;Plus&#8594;Pro · ads in eligible surfaces</div>
             <div class="om-cell">Plus&#8594;Pro tier-up · usage</div>
             <div class="om-cell">Churn-save · win-back</div>
 
@@ -204,18 +205,18 @@
           <p class="om-kicker">What explodes &mdash; the decision surface</p>
           <div class="om-panel-h">
             <div class="om-count" style="color:var(--green-bright)">900M+</div>
-            <div class="om-count-lab">weekly active accounts<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different lifecycle state</div>
+            <div class="om-count-lab">weekly active users<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different lifecycle state</div>
           </div>
           <div class="om-rule"></div>
 
           <div class="om-stack">
             <div class="om-mult"><span class="v">~20</span><span class="d"><b>clubbed templates</b> &mdash; stable; barely changes quarter to quarter</span></div>
-            <div class="om-mult"><span class="x">&times;</span><span class="v">28+</span><span class="d"><b>products / surfaces</b> &mdash; ~3&times; the SKUs of 2024, new launches almost weekly</span></div>
-            <div class="om-mult"><span class="x">&times;</span><span class="v">900M+</span><span class="d"><b>weekly actives</b> · 50M+ paid · 1M+ business accounts<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different segment &amp; lifecycle state</span></div>
+            <div class="om-mult"><span class="x">&times;</span><span class="v">28+</span><span class="d"><b>products, surfaces &amp; plans</b> &mdash; ~3&times; the count of 2024, new launches almost weekly</span></div>
+            <div class="om-mult"><span class="x">&times;</span><span class="v">900M+</span><span class="d"><b>weekly active users</b> · 50M+ paying subscribers · 1M+ business customers<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different segment &amp; lifecycle state</span></div>
           </div>
 
           <div class="spacer"></div>
-          <div class="om-explode"><b>The template count is small and stable. The decision surface isn&#8217;t.</b> Run ~20 plays against a weekly-growing product surface and a 900M-account base sitting in millions of different states, and the live &ldquo;should this motion fire, for this account, right now?&rdquo; decisions outrun any human team. Agentic systems instantiate and arbitrate them &mdash; the mandate of the <b>GTM Growth PM, Agentic Systems</b>.</div>
+          <div class="om-explode"><b>The template count is small and stable. The decision surface isn&#8217;t.</b> Run ~20 plays against a weekly-growing product surface and a 900M-user base sitting in millions of different states, and the live &ldquo;should this motion fire, for this user, right now?&rdquo; decisions outrun any human team. Agentic systems instantiate and arbitrate them &mdash; the mandate of the <b>GTM Growth PM, Agentic Systems</b>.</div>
         </div>
       </div>
 
@@ -240,14 +241,14 @@
 
       <div class="om-tie"><b>Why this role exists:</b> the plays are clubbed and finite (~20), but the instances &mdash; surfaces &times; accounts &times; state &mdash; grow faster than any team can staff. Agentic GTM systems instantiate and arbitrate them; a PM owns the templates, the arbitration logic, and the eval harness that keeps it honest.</div>
 
-      <div class="src"><b>1</b> &mdash; Base figures are from public reporting: 800M weekly actives (Sam Altman / TechCrunch, Oct 2025), 900M+ weekly actives (Reuters, Jun 2026), 50M+ paying consumer subscribers and 1M+ business customers (OpenAI). &nbsp;Reconstructed June 2026 &mdash; not an official OpenAI artifact. Segment, stage and template counts are an analyst&#8217;s model of how the motions club together; OpenAI does not publish an official motion or next-best-action count, so the resulting <em>decision surface</em> is an implied estimate built on the sourced base figures &mdash; not an OpenAI-published metric.</div>
+      <div class="src"><b>1</b> &mdash; Base figures are OpenAI-published / reported: 800M weekly active users (Sam Altman / TechCrunch, Oct 2025), 900M+ weekly active users (Reuters, Jun 2026), 50M+ paying subscribers, and 1M+ business customers (also reported as 9M+ paying business users) (OpenAI). &nbsp;Reconstructed June 2026 &mdash; not an official OpenAI artifact. The 5-segment / 4-stage / ~20-template structure is my analyst model of how the motions club together; OpenAI does not publish an official motion or next-best-action count, so the resulting <em>decision surface</em> is an implied estimate built on the sourced base figures &mdash; not an OpenAI-published metric.</div>
     </div>
 
     <div class="slide panel-view" id="stack" hidden>
       <div class="stack-header">
         <p class="eyebrow">OpenAI · GTM stack · June 2026</p>
         <h1 class="title">Go-To-Market (GTM) Stack <em>v4</em></h1>
-        <p class="stack-subtitle">Tools &amp; data flow · validated June 2026 · Nue + Ironclad confirmed, Outreach reframed as ecosystem signal</p>
+        <p class="stack-subtitle">Tools &amp; data flow · June 2026 · confidence-tagged — confirmed (official / vendor-stated) vs reported / inferred. The AI-native internal layer is reconstructed from interviews and is directional, not officially confirmed.</p>
       </div>
 
       <div class="stack-wrap" id="stack-diagram-stage">
@@ -288,7 +289,7 @@
     </div>
 
     <div class="slide panel-view" id="challenges" hidden>
-      <p class="eyebrow">OpenAI · GTM top 5 challenges · Claude &times; Gemini synthesis</p>
+      <p class="eyebrow">OpenAI · GTM top 5 challenges</p>
       <h1 class="title">Where the GTM team is actually <em>stuck</em>.</h1>
 
       <div class="chal">
@@ -300,7 +301,6 @@
           </div>
           <div class="chal-desc">The prerequisite for everything agentic. Feed agents messy data and they don&#8217;t fail loudly &mdash; they get it wrong quietly, at scale. Meanwhile every tool ships its own agent and wants to be the orchestrator, selling autonomy rather than interoperability.</div>
           <div class="chal-ev"><span class="ev-k">Evidence</span>Multi-source enrichment lifted coverage from the low-40s to high-80s%; the team built its internal data dictionary using OpenAI&#8217;s own models. <span class="src-tag">— Keith Jones, OpenAI</span></div>
-          <div class="chal-prov"><span class="prov claude">Claude</span><span class="prov">consolidated per Gemini</span></div>
         </div>
       </div>
 
@@ -312,8 +312,7 @@
             <span class="chal-tag role">You&#8217;d own this</span>
           </div>
           <div class="chal-desc">The plays are clubbed and finite (~20 segment &times; lifecycle templates), but several are eligible for the same logged-in account at once. The hard part is deciding which <em>one</em> wins right now &mdash; without stacking asks, cannibalizing a bigger motion, or breaking trust. (See the Operating map tab.)</div>
-          <div class="chal-ev"><span class="ev-k">Evidence</span>~20 clubbed motion templates &times; a weekly-growing 28+ product surface &times; millions of logged-in accounts, each in a different state; multiple motions can fire on the same account, arbitrated against 9 strategic priorities.</div>
-          <div class="chal-prov"><span class="prov gemini">Gemini</span><span class="prov">sharpest add</span></div>
+          <div class="chal-ev"><span class="ev-k">Evidence</span>~20 clubbed motion templates &times; a weekly-growing 28+ product/surface base &times; 900M+ weekly active users, each in a different state; multiple motions can fire on the same user, arbitrated against 9 strategic priorities.</div>
         </div>
       </div>
 
@@ -325,8 +324,7 @@
             <span class="chal-tag role">You&#8217;d own this</span>
           </div>
           <div class="chal-desc">You can&#8217;t unit-test an LLM in a Salesforce sandbox. Agentic changes need eval harnesses before they touch live revenue, or they quietly hallucinate routing and discount logic.</div>
-          <div class="chal-ev"><span class="ev-k">Evidence</span>OpenAI&#8217;s inbound assistant used an eval loop to take first-email accuracy from 60% &#8594; 98%; per Keith Jones, the GTM Systems team also runs agents on <b>Symphony</b> &mdash; OpenAI&#8217;s open-source &ldquo;issue-tracker-as-control-plane&rdquo; orchestration spec (human-in-the-loop review, auto-restart on failure).</div>
-          <div class="chal-prov"><span class="prov gemini">Gemini</span><span class="prov claude">refined by Claude</span></div>
+          <div class="chal-ev"><span class="ev-k">Evidence</span>OpenAI&#8217;s inbound assistant used an eval loop to take first-email accuracy from 60% &#8594; 98%; per Keith Jones, the GTM Systems team reportedly runs agents on an internal &ldquo;issue-tracker-as-control-plane&rdquo; orchestration approach with human-in-the-loop review <span class="src-tag">(interview-sourced; not an independently verified public artifact)</span>.</div>
         </div>
       </div>
 
@@ -337,9 +335,8 @@
             <span class="chal-title">Expansion &amp; retention vs. a stronger-on-enterprise Anthropic</span>
             <span class="chal-tag context">Strategic context</span>
           </div>
-          <div class="chal-desc">The motion is shifting from land-grab to keep-and-grow at the worst competitive moment &mdash; and the expansion/retention systems are the least-built part of the stack.</div>
-          <div class="chal-ev"><span class="ev-k">Evidence</span>Anthropic ~$47B run-rate (mid-May 2026) vs OpenAI ~$33B; retention &asymp; 88% Enterprise / 68% Team / 59% Plus; enterprise nearing revenue parity by end-2026.</div>
-          <div class="chal-prov"><span class="prov both">Both</span></div>
+          <div class="chal-desc">As enterprise competition intensifies, the motion shifts from land-grab to keep-and-grow &mdash; making expansion, retention, and proof-of-value systems matter more, exactly where the stack is least built.</div>
+          <div class="chal-ev"><span class="ev-k">Evidence</span>OpenAI&#8217;s enterprise mix is climbing toward parity with consumer while a well-capitalized competitor presses hardest on enterprise; expansion / net-revenue-retention systems are the newest part of the GTM stack. <span class="src-tag">(directional; specific run-rate &amp; retention figures intentionally omitted as not reliably sourceable)</span></div>
         </div>
       </div>
 
@@ -351,8 +348,7 @@
             <span class="chal-tag context">Strategic context</span>
           </div>
           <div class="chal-desc">The spreadsheet era is over. Every quote, contract, and billing pipeline must be instantly auditable while products still ship weekly.</div>
-          <div class="chal-ev"><span class="ev-k">Evidence</span>Nue (CPQ) and Ironclad (CLM) stood up fast for a multi-currency, multi-jurisdiction business; confidential S-1 filed June 8, 2026.</div>
-          <div class="chal-prov"><span class="prov both">Both</span></div>
+          <div class="chal-ev"><span class="ev-k">Evidence</span>A CPQ + CLM quote-to-cash stack must stand up fast for a multi-currency, multi-jurisdiction business; OpenAI filed a confidential S-1 on June 8, 2026. <span class="src-tag">(S-1 official; specific vendors reported / inferred)</span></div>
         </div>
       </div>
 
@@ -361,7 +357,7 @@
         <div class="driver-body"><b>The force behind all five: velocity outruns headcount.</b> OpenAI&#8217;s run-rate is ~$33B and climbing while new products, SKUs, and modalities ship almost weekly. The AI-native internal layer isn&#8217;t a nice-to-have &mdash; it&#8217;s the only way human capacity keeps pace. This is the <b>why</b> beneath the five, not a sixth item.</div>
       </div>
 
-      <div class="src">Synthesized from this thread&#8217;s Claude and Gemini analyses, June 2026. Figures are paraphrased from public reporting and vendor case studies; provenance tags show which model surfaced each point. Not an official OpenAI artifact.</div>
+      <div class="src">Assembled June 2026 from public reporting, vendor case studies, and Keith Jones interviews; figures are paraphrased and directional. Not an official OpenAI artifact. Items are tagged for confidence; specific competitive run-rate and retention figures are intentionally omitted as not reliably sourceable.</div>
     </div>
   </div>
 
