@@ -1,100 +1,121 @@
-/* OpenAI GTM Stack v2 — graph data extracted from openai-gtm-stack-v2.drawio */
+/* OpenAI GTM Stack v4 — graph data from openai-gtm-stack-v4.drawio */
 (function (root) {
   var S = 0.76;
-  var COL_W = 210;
-  var COL_GAP = 118;
-  var COL_X0 = 90;
-  var NODE_H = 64;
-  var ROW_GAP = 72;
-  var LANE_PAD = 54;
-  var BTM_W = 192;
-
-  function colX(index) {
-    return COL_X0 + index * (COL_W + COL_GAP);
-  }
 
   function center(x, y, w, h) {
     return { x: (x + w / 2) * S, y: (y + h / 2) * S };
   }
 
-  var swimlanes = [
-    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 85, w: 1620, h: 148, tone: 'neutral' },
-    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 305, w: 1620, h: 148, tone: 'neutral' },
-    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 525, w: 1620, h: 138, tone: 'crm' },
-    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 735, w: 1620, h: 268, tone: 'ai' },
-    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 1075, w: 1620, h: 148, tone: 'neutral' },
-    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1295, w: 1620, h: 158, tone: 'neutral' }
-  ];
-
-  function laneNodeY(laneIndex) {
-    return swimlanes[laneIndex].y + LANE_PAD;
+  function g(x, y, w, h) {
+    return [x, y, w, h];
   }
 
+  var swimlanes = [
+    { id: 'p0', label: 'GTM CHANNELS · ROUTES TO MARKET', x: 40, y: 110, w: 1500, h: 150, tone: 'channel' },
+    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 280, w: 1500, h: 120, tone: 'neutral' },
+    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 420, w: 1500, h: 120, tone: 'neutral' },
+    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 560, w: 1500, h: 110, tone: 'crm' },
+    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 690, w: 1500, h: 210, tone: 'ai' },
+    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 920, w: 1500, h: 120, tone: 'neutral' },
+    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1060, w: 1500, h: 130, tone: 'neutral' }
+  ];
+
   var nodes = [
-    { id: 'inbound_demand', category: 'confirmed', panel: 'p1',
-      geom: [colX(0), laneNodeY(0), COL_W, NODE_H],
+    /* GTM channels */
+    { id: 'ch_plg', category: 'confirmed', geom: g(70, 150, 190, 85),
+      label: 'Self-serve / PLG', sub: 'ChatGPT · API self-serve signups' },
+    { id: 'ch_direct', category: 'confirmed', geom: g(278, 150, 190, 85),
+      label: 'Direct enterprise sales', sub: 'AEs · Connect with Sales handoff' },
+    { id: 'ch_partner', category: 'confirmed', geom: g(486, 150, 190, 85),
+      label: 'Partner Network (NEW)', sub: 'SIs · consultancies · resellers · co-sell' },
+    { id: 'ch_cloud', category: 'likely', geom: g(694, 150, 190, 85),
+      label: 'Cloud marketplaces', sub: 'Azure · Oracle · Snowflake co-sell' },
+    { id: 'ch_prod', category: 'likely', geom: g(902, 150, 190, 85),
+      label: 'Product partnerships', sub: 'Salesforce · Stripe · ZoomInfo (embed)' },
+    { id: 'ch_apps', category: 'confirmed', geom: g(1110, 150, 190, 85),
+      label: 'App ecosystem', sub: 'ChatGPT Apps · GPT Store · Codex plugins' },
+    { id: 'ch_oem', category: 'likely', geom: g(1318, 150, 190, 85),
+      label: 'Embedded / OEM', sub: 'Apple Intelligence · in-app models' },
+
+    /* Demand / marketing */
+    { id: 'inbound_demand', category: 'confirmed', geom: g(90, 315, 260, 70),
       label: 'Inbound Demand', sub: 'Web forms · ChatGPT Enterprise/Business signups' },
-    { id: 'mktg', category: 'likely', panel: 'p1',
-      geom: [colX(1), laneNodeY(0), COL_W, NODE_H],
+    { id: 'mktg', category: 'likely', geom: g(450, 315, 260, 70),
       label: 'Marketing Automation', sub: 'HubSpot (reported)' },
-    { id: 'zoominfo', category: 'likely', panel: 'p1',
-      geom: [colX(2), laneNodeY(0), COL_W, NODE_H],
+    { id: 'zoominfo', category: 'likely', geom: g(810, 315, 260, 70),
       label: 'ZoomInfo', sub: 'B2B data / GTM context graph' },
-    { id: 'codex', category: 'surface', panel: 'p1',
-      geom: [colX(3), laneNodeY(0), COL_W, NODE_H],
+    { id: 'codex', category: 'surface', geom: g(1170, 315, 260, 70),
       label: 'Codex for Work', sub: 'Surface · Sales plugin · ZoomInfo + Clay apps' },
-    { id: 'inbound_ai', category: 'ai-native', panel: 'p2',
-      geom: [colX(0), laneNodeY(1), COL_W, NODE_H],
+
+    /* Inbound AI */
+    { id: 'inbound_ai', category: 'ai-native', geom: g(90, 455, 260, 70),
       label: 'Inbound Sales Assistant', sub: 'internal "TailorAssist" · auto-responds, qualifies, hands off' },
-    { id: 'clay', category: 'confirmed', panel: 'p2',
-      geom: [colX(1), laneNodeY(1), COL_W, NODE_H],
+    { id: 'clay', category: 'confirmed', geom: g(450, 455, 260, 70),
       label: 'Clay', sub: 'Enrichment · account research (RevOps + Sales)' },
-    { id: 'leandata', category: 'confirmed', panel: 'p2',
-      geom: [colX(2), laneNodeY(1), COL_W, NODE_H],
+    { id: 'leandata', category: 'confirmed', geom: g(810, 455, 260, 70),
       label: 'LeanData', sub: 'Lead-to-account routing (native to Salesforce)' },
-    { id: 'salesforce', category: 'hub', panel: 'p3',
-      geom: [colX(1) - 36, laneNodeY(2), COL_W * 2 + COL_GAP + 72, NODE_H + 6],
+
+    /* CRM */
+    { id: 'salesforce', category: 'hub', geom: g(540, 580, 500, 70),
       label: 'Salesforce', sub: 'Core CRM · System of Record · (Agentforce 360 ↔ ChatGPT)' },
-    { id: 'kb', category: 'ai-native', panel: 'p4',
-      geom: [colX(0), laneNodeY(3), COL_W, NODE_H + 6], shape: 'barrel',
+    { id: 'ch_gap', category: 'unconfirmed', geom: g(1080, 585, 400, 70),
+      label: 'Partner & marketplace routing', sub: 'deal registration · co-sell · channel attribution — GAP (no confirmed system)' },
+
+    /* AI-native layer */
+    { id: 'kb', category: 'ai-native', geom: g(100, 720, 240, 80), shape: 'barrel',
       label: 'Knowledge Base / Connectors', sub: 'Docs · policies · playbooks · customer stories' },
-    { id: 'gtm_assistant', category: 'ai-native', panel: 'p4',
-      geom: [colX(1), laneNodeY(3), COL_W, NODE_H],
+    { id: 'gtm_assistant', category: 'ai-native', geom: g(450, 720, 260, 70),
       label: 'GTM Assistant', sub: 'Briefs · recaps · product Q&A · CRM writeback' },
-    { id: 'docugpt', category: 'ai-native', panel: 'p4',
-      geom: [colX(2), laneNodeY(3), COL_W, NODE_H],
+    { id: 'docugpt', category: 'ai-native', geom: g(810, 720, 260, 70),
       label: 'DocuGPT', sub: 'Contracts → searchable structured data' },
-    { id: 'slack', category: 'surface', panel: 'p4',
-      geom: [colX(3), laneNodeY(3), COL_W, NODE_H],
+    { id: 'slack', category: 'surface', geom: g(1170, 720, 260, 70),
       label: 'Slack', sub: 'Primary delivery surface' },
-    { id: 'openai_core', category: 'platform', panel: 'p4',
-      geom: [colX(0), laneNodeY(3) + NODE_H + 44, COL_W * 3 + COL_GAP * 2, 52],
+    { id: 'openai_core', category: 'platform', geom: g(100, 820, 970, 55),
       label: 'OpenAI Models / API · AgentKit · internal Automation Platform · eval loops', sub: '' },
-    { id: 'gong', category: 'likely', panel: 'p5',
-      geom: [colX(0), laneNodeY(4), COL_W, NODE_H],
+    { id: 'symphony', category: 'ai-native', geom: g(1090, 818, 390, 62),
+      label: 'Symphony', sub: 'Agent orchestration · open-source control-plane spec · task board → agents · human review' },
+
+    /* Engagement */
+    { id: 'gong', category: 'likely', geom: g(90, 955, 260, 70),
       label: 'Gong', sub: 'Conversation intelligence · call notes (inferred)' },
-    { id: 'outreach', category: 'likely', panel: 'p5',
-      geom: [colX(1), laneNodeY(4), COL_W + 16, NODE_H],
+    { id: 'outreach', category: 'likely', geom: g(450, 955, 280, 70),
       label: 'Outreach', sub: 'Sales engagement · MCP Server ↔ ChatGPT (Feb 2026); internal use unconfirmed' },
-    { id: 'nue', category: 'confirmed', panel: 'p6',
-      geom: [colX(0), laneNodeY(5), BTM_W, NODE_H + 4],
+
+    /* Quote-to-cash — drawio positions (no overlap) */
+    { id: 'nue', category: 'confirmed', geom: g(70, 1095, 250, 75),
       label: 'Nue', sub: 'CPQ / lead-to-quote · Salesforce-native · subs + usage billing' },
-    { id: 'stripe', category: 'likely', panel: 'p6',
-      geom: [colX(1), laneNodeY(5), BTM_W, NODE_H + 4],
+    { id: 'stripe', category: 'likely', geom: g(360, 1095, 250, 75),
       label: 'Stripe', sub: 'Payments rails · Agentic Commerce Protocol' },
-    { id: 'snowflake', category: 'likely', panel: 'p6',
-      geom: [colX(2), laneNodeY(5), BTM_W, NODE_H + 4],
+    { id: 'snowflake', category: 'likely', geom: g(650, 1095, 250, 75),
       label: 'Snowflake', sub: 'Data Cloud / warehouse ($200M partnership)' },
-    { id: 'attribution', category: 'unconfirmed', panel: 'p6',
-      geom: [colX(3), laneNodeY(5), BTM_W, NODE_H + 4],
+    { id: 'attribution', category: 'unconfirmed', geom: g(940, 1095, 250, 75),
       label: 'Attribution', sub: 'JD category (vendor unconfirmed)' },
-    { id: 'ironclad', category: 'confirmed', panel: 'p6',
-      geom: [colX(4), laneNodeY(5), BTM_W, NODE_H + 4],
+    { id: 'ironclad', category: 'confirmed', geom: g(1230, 1095, 250, 75),
       label: 'Ironclad', sub: 'Contract Lifecycle Mgmt (CLM) · eSign · Salesforce-integrated' }
   ];
 
-  /* labelMy / labelMx nudge edge labels; turn spreads taxi routing */
   var edges = [
+    /* Channel routes */
+    { id: 'e_plg', source: 'ch_plg', target: 'inbound_demand', label: 'self-serve signup → conversion', type: 'confirmed',
+      labelMy: -14, labelMx: -42, turn: 28 },
+    { id: 'e_dir', source: 'ch_direct', target: 'salesforce', label: 'AE-owned', type: 'confirmed',
+      labelMy: -12, labelMx: -55, turn: 48 },
+    { id: 'e_par', source: 'ch_partner', target: 'ch_gap', label: 'deal registration', type: 'likely',
+      labelMy: -14, labelMx: -20, turn: 24 },
+    { id: 'e_cloud', source: 'ch_cloud', target: 'ch_gap', label: 'marketplace co-sell', type: 'likely',
+      labelMy: -14, labelMx: 8, turn: 22 },
+    { id: 'e_prod', source: 'ch_prod', target: 'salesforce', label: 'co-sell + embed', type: 'likely',
+      labelMy: -16, labelMx: -35, turn: 44 },
+    { id: 'e_apps', source: 'ch_apps', target: 'stripe', label: 'Instant Checkout', type: 'confirmed',
+      labelMy: -14, labelMx: 30, turn: 38 },
+    { id: 'e_oem', source: 'ch_oem', target: 'ch_gap', label: 'usage attribution', type: 'likely',
+      labelMy: -14, labelMx: 35, turn: 26 },
+    { id: 'e_gap1', source: 'ch_gap', target: 'salesforce', label: 'route (no system)', type: 'unconfirmed',
+      labelMy: -14, labelMx: -45, turn: 20 },
+    { id: 'e_gap2', source: 'ch_gap', target: 'attribution', label: 'credit-split (no system)', type: 'unconfirmed',
+      labelMy: 14, labelMx: 40, turn: 36 },
+
+    /* Core stack */
     { id: 'e1', source: 'inbound_demand', target: 'inbound_ai', label: 'inbound leads', type: 'confirmed',
       labelMy: -14, labelMx: -48, turn: 30 },
     { id: 'e2', source: 'inbound_ai', target: 'salesforce', label: 'qualified handoff + writeback', type: 'confirmed',
@@ -112,7 +133,7 @@
     { id: 'e8', source: 'gtm_assistant', target: 'slack', label: 'delivers in', type: 'confirmed',
       labelMy: -16, labelMx: 10, turn: 24 },
     { id: 'e9', source: 'openai_core', target: 'gtm_assistant', label: 'powers', type: 'confirmed',
-      labelMy: -10, labelMx: -38, turn: 22 },
+      labelMy: -10, labelMx: -28, turn: 22 },
     { id: 'e10', source: 'openai_core', target: 'inbound_ai', label: 'powers', type: 'confirmed',
       labelMy: -10, labelMx: -68, turn: 30 },
     { id: 'e11', source: 'openai_core', target: 'docugpt', label: 'powers', type: 'confirmed',
@@ -148,7 +169,17 @@
     { id: 'e_outsf', source: 'outreach', target: 'salesforce', label: 'activity logging (via MCP)', type: 'likely',
       labelMy: -14, labelMx: 38, turn: 40 },
     { id: 'e25', source: 'snowflake', target: 'attribution', label: 'models', type: 'unconfirmed',
-      labelMy: -16, labelMx: 0, turn: 18 }
+      labelMy: -16, labelMx: 0, turn: 18 },
+
+    /* Symphony orchestration */
+    { id: 'e_sym_core', source: 'openai_core', target: 'symphony', label: 'runs on', type: 'confirmed',
+      labelMy: -12, labelMx: 12, turn: 16 },
+    { id: 'e_sym_gtm', source: 'symphony', target: 'gtm_assistant', label: 'orchestrates', type: 'confirmed',
+      labelMy: -14, labelMx: -38, turn: 24 },
+    { id: 'e_sym_doc', source: 'symphony', target: 'docugpt', label: 'orchestrates', type: 'confirmed',
+      labelMy: -14, labelMx: 0, turn: 20 },
+    { id: 'e_sym_inb', source: 'symphony', target: 'inbound_ai', label: 'orchestrates', type: 'confirmed-dashed',
+      labelMy: -14, labelMx: -55, turn: 32 }
   ];
 
   var orgNote = 'The GTM Systems team, led by Keith Jones (Head of GTM Systems), owns Salesforce + integrations + the agent layer, treating Sales / RevOps as its internal end-users. Reportedly consolidated under a single Finance budget line for headcount / cost alignment (per interview — not independently verified).';
@@ -171,7 +202,7 @@
     var ty = tgt.geom[1] + tgt.geom[3] / 2;
     var dx = tx - sx;
     var dy = ty - sy;
-    if (Math.abs(dy) <= 60 && Math.abs(dx) > 100) return { taxi: 'horizontal' };
+    if (Math.abs(dy) <= 55 && Math.abs(dx) > 90) return { taxi: 'horizontal' };
     return { taxi: 'vertical' };
   }
 

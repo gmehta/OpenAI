@@ -56,6 +56,10 @@
         }
       },
       {
+        selector: 'node.swimlane[tone = "channel"]',
+        style: { 'background-color': '#F3F1F8', 'background-opacity': 0.35, 'border-color': '#E0DAEC', color: '#9B8FB5' }
+      },
+      {
         selector: 'node.swimlane[tone = "crm"]',
         style: { 'background-color': '#F4FBF8', 'background-opacity': 0.35, 'border-color': '#CDE8DE', color: '#8FB8AC' }
       },
@@ -429,7 +433,7 @@
     var zoomW = (container.clientWidth - padding * 2) / bb.w;
     var zoomH = (container.clientHeight - padding * 2) / bb.h;
     var zoom = Math.min(zoomW, zoomH);
-    zoom = Math.max(zoom, 0.55);
+    zoom = Math.max(zoom, 0.42);
     cy.zoom(zoom);
     cy.center();
   }

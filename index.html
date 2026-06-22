@@ -158,7 +158,7 @@
     <div class="slide panel-view" id="stack" hidden>
       <div class="stack-header">
         <p class="eyebrow">OpenAI · GTM stack · June 2026</p>
-        <h1 class="title">Go-To-Market (GTM) Stack <em>v2</em></h1>
+        <h1 class="title">Go-To-Market (GTM) Stack <em>v4</em></h1>
         <p class="stack-subtitle">Tools &amp; data flow · validated June 2026 · Nue + Ironclad confirmed, Outreach reframed as ecosystem signal</p>
       </div>
 
@@ -223,7 +223,7 @@
             <span class="chal-title">Motion collision &mdash; next-best-action arbitration</span>
             <span class="chal-tag role">You&#8217;d own this</span>
           </div>
-          <div class="chal-desc">With ~3,500 possible motions, executing one is easy; the hard part is deciding which wins for a given user right now, without stacking asks or breaking trust. (See the Operating map tab for the scale of the problem.)</div>
+          <div class="chal-desc">With ~3,500 possible motions, executing one is easy; the hard part is deciding which wins for a given user right now, without stacking asks or breaking trust. (See the Operating map tab.)</div>
           <div class="chal-ev"><span class="ev-k">Evidence</span>28 products &times; 14 actions &times; 9 priorities = 3,528 motions; multiple agents can fire on the same logged-in account.</div>
           <div class="chal-prov"><span class="prov gemini">Gemini</span><span class="prov">sharpest add</span></div>
         </div>
@@ -233,12 +233,12 @@
         <div class="chal-num">3</div>
         <div class="chal-body">
           <div class="chal-head">
-            <span class="chal-title">Evals for non-deterministic GTM logic</span>
+            <span class="chal-title">Orchestrating &amp; evaluating non-deterministic GTM logic</span>
             <span class="chal-tag role">You&#8217;d own this</span>
           </div>
           <div class="chal-desc">You can&#8217;t unit-test an LLM in a Salesforce sandbox. Agentic changes need eval harnesses before they touch live revenue, or they quietly hallucinate routing and discount logic.</div>
-          <div class="chal-ev"><span class="ev-k">Evidence</span>OpenAI&#8217;s inbound assistant used an eval loop to take first-email accuracy from 60% &#8594; 98%. <span class="src-tag">(Not &ldquo;Symphony&rdquo; &mdash; that&#8217;s a Codex coding-agent orchestrator, not a GTM tool.)</span></div>
-          <div class="chal-prov"><span class="prov gemini">Gemini</span><span class="prov claude">evidence fixed by Claude</span></div>
+          <div class="chal-ev"><span class="ev-k">Evidence</span>OpenAI&#8217;s inbound assistant used an eval loop to take first-email accuracy from 60% &#8594; 98%; per Keith Jones, the GTM Systems team also runs agents on <b>Symphony</b> &mdash; OpenAI&#8217;s open-source &ldquo;issue-tracker-as-control-plane&rdquo; orchestration spec (human-in-the-loop review, auto-restart on failure).</div>
+          <div class="chal-prov"><span class="prov gemini">Gemini</span><span class="prov claude">refined by Claude</span></div>
         </div>
       </div>
 
