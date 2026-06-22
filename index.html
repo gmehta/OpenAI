@@ -5,6 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenAI GTM Operating Map</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ---- Operating map v2: clubbed segment × lifecycle model ---- */
+    #map .om-lede {
+      font-size: 13.5px; color: var(--ink-soft); line-height: 1.55;
+      max-width: 880px; margin: -14px 0 24px;
+    }
+    #map .om-lede b { color: var(--ink); font-weight: 600; }
+    #map .om-lede em { font-style: normal; color: var(--green-bright); font-weight: 600; }
+
+    #map .om-two {
+      display: grid; grid-template-columns: 1.62fr 1fr; gap: 20px; align-items: stretch;
+    }
+    #map .om-panel {
+      background: var(--panel); border: 1px solid var(--panel-line);
+      border-radius: 8px; padding: 18px 18px 16px; display: flex; flex-direction: column;
+    }
+    #map .om-kicker {
+      font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+      text-transform: uppercase; color: var(--green); margin: 0 0 8px;
+    }
+    #map .om-panel-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+    #map .om-count {
+      font-family: var(--mono); font-size: 40px; font-weight: 600; line-height: 1;
+      color: var(--green); letter-spacing: -.02em;
+    }
+    #map .om-count-lab { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    #map .om-rule { height: 1px; background: var(--panel-line); margin: 13px 0; }
+
+    /* matrix */
+    #map .om-matrix { display: grid; grid-template-columns: 104px repeat(4, 1fr); gap: 5px; }
+    #map .om-corner {
+      font-family: var(--mono); font-size: 8px; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--ink-soft); align-self: end; line-height: 1.3; padding-bottom: 3px;
+    }
+    #map .om-colh {
+      font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--green); align-self: end;
+      padding: 0 3px 3px; line-height: 1.25; border-bottom: 2px solid var(--green);
+    }
+    #map .om-rowlab {
+      font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.2;
+      display: flex; flex-direction: column; justify-content: center; padding-right: 4px;
+    }
+    #map .om-rowlab small {
+      font-family: var(--mono); font-weight: 400; font-size: 7.7px; letter-spacing: .02em;
+      color: var(--ink-soft); margin-top: 3px; line-height: 1.3;
+    }
+    #map .om-cell {
+      background: var(--canvas); border: 1px solid var(--panel-line); border-radius: 5px;
+      padding: 6px 7px; font-size: 9.6px; line-height: 1.32; color: var(--ink); min-height: 46px;
+      display: flex; align-items: center;
+    }
+    #map .om-cell.seam {
+      border-color: var(--green-bright); background: #EFF9F4;
+      box-shadow: inset 0 0 0 1px rgba(19,133,95,.28);
+    }
+    #map .om-seamdot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 2px;
+      background: var(--green-bright); margin-right: 4px; flex-shrink: 0;
+    }
+    #map .om-matrix-note {
+      font-size: 10.5px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px;
+    }
+    #map .om-matrix-note b { color: var(--ink); font-weight: 600; }
+    #map .om-clubs {
+      font-family: var(--mono); font-size: 9.3px; color: var(--ink-soft);
+      line-height: 1.6; margin-top: 10px; border-top: 1px dashed var(--panel-line); padding-top: 10px;
+    }
+    #map .om-clubs b { color: var(--green); font-weight: 600; }
+
+    /* instances panel */
+    #map .om-stack { display: flex; flex-direction: column; gap: 11px; }
+    #map .om-mult { display: flex; align-items: baseline; gap: 9px; }
+    #map .om-mult .x {
+      font-family: var(--mono); font-size: 16px; color: rgba(14,92,70,.5); font-weight: 500; min-width: 14px;
+    }
+    #map .om-mult .v {
+      font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.1;
+    }
+    #map .om-mult .d { font-size: 11px; color: var(--ink-soft); line-height: 1.35; }
+    #map .om-mult .d b { color: var(--ink); font-weight: 600; }
+    #map .om-explode {
+      margin-top: 4px; background: var(--pill); color: var(--pill-ink);
+      border-radius: 6px; padding: 12px 14px; line-height: 1.4; font-size: 12px;
+    }
+    #map .om-explode b { color: #fff; font-weight: 700; }
+
+    /* arbitration strip */
+    #map .om-arb {
+      margin-top: 24px; border-top: 2px solid var(--green); padding-top: 22px;
+      display: grid; grid-template-columns: 1.05fr 1fr; gap: 26px; align-items: start;
+    }
+    #map .om-arb-l .om-kicker { margin-bottom: 10px; }
+    #map .om-prio { display: flex; flex-wrap: wrap; gap: 6px; }
+    #map .om-prio span {
+      font-family: var(--mono); font-size: 9.5px; color: var(--ink); background: var(--canvas);
+      border: 1px solid var(--panel-line); border-radius: 5px; padding: 4px 8px; line-height: 1.3;
+    }
+    #map .om-arb-r { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+    #map .om-arb-r b { color: var(--ink); font-weight: 700; }
+    #map .om-arb-r em { font-style: normal; color: var(--green-bright); font-weight: 600; }
+
+    #map .om-tie {
+      margin-top: 22px; background: var(--panel); border: 1px solid var(--panel-line);
+      border-left: 4px solid var(--green); border-radius: 8px; padding: 13px 16px;
+      font-size: 13px; color: var(--ink-soft); line-height: 1.55;
+    }
+    #map .om-tie b { color: var(--ink); font-weight: 700; }
+
+    @media (max-width: 860px) {
+      #map .om-two { grid-template-columns: 1fr; }
+      #map .om-matrix { grid-template-columns: 84px repeat(4, 1fr); }
+      #map .om-cell { font-size: 9px; }
+      #map .om-arb { grid-template-columns: 1fr; gap: 16px; }
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -21,6 +137,7 @@
       <p class="om-lede">A naive read multiplies <b>products &times; actions</b> &mdash; but &ldquo;Free&#8594;Paid&rdquo; doesn&#8217;t apply to the API, &ldquo;seat expansion&rdquo; doesn&#8217;t apply to ChatGPT Free, and &ldquo;Connect with Sales&rdquo; doesn&#8217;t apply to a $20 Plus user. In reality the team <em>clubs</em> the 14 actions into <b>4 lifecycle stages</b> and the 28 products into <b>5 customer segments</b>. A &ldquo;motion&rdquo; is a <b>segment &times; lifecycle</b> play, instantiated across whatever products live in that segment. That keeps the <em>template</em> count small and stable &mdash; while the <em>instance</em> count is what runs away.</p>
 
       <div class="om-two">
+        <!-- LEFT: the clubbed templates (stable layer) -->
         <div class="om-panel">
           <p class="om-kicker">The stable layer &mdash; what the team actually runs</p>
           <div class="om-panel-h">
@@ -36,30 +153,35 @@
             <div class="om-colh">Expand</div>
             <div class="om-colh">Retain &amp; Renew</div>
 
+            <!-- Consumer -->
             <div class="om-rowlab">Consumer<small>Free·Go·Plus·Pro — PLG / ads</small></div>
             <div class="om-cell">First-time use &#8594; first value</div>
             <div class="om-cell">Free&#8594;Go&#8594;Plus&#8594;Pro · ads on free</div>
             <div class="om-cell">Plus&#8594;Pro tier-up · usage</div>
             <div class="om-cell">Churn-save · win-back</div>
 
+            <!-- SMB / Business -->
             <div class="om-rowlab">SMB / Business<small>Business 2+ seats — product-led sales</small></div>
             <div class="om-cell">Team self-serve signup</div>
             <div class="om-cell seam"><span class="om-seamdot"></span>Self-serve &#8594; Business</div>
             <div class="om-cell">Seat land-and-expand · Codex cross-sell</div>
             <div class="om-cell">Renewal · churn-save</div>
 
+            <!-- Enterprise -->
             <div class="om-rowlab">Enterprise<small>Deployed — sales-led (CRO org)</small></div>
             <div class="om-cell">Inbound handoff · prospecting</div>
             <div class="om-cell seam"><span class="om-seamdot"></span>Business&#8594;Enterprise · POC&#8594;production</div>
             <div class="om-cell">Seats · usage · new use-cases</div>
             <div class="om-cell">Renewal · exec QBR</div>
 
+            <!-- Developer / Platform -->
             <div class="om-rowlab">Developer / Platform<small>API · AgentKit · Apps SDK</small></div>
             <div class="om-cell">Developer &amp; API acquisition</div>
             <div class="om-cell">PAYG spend activation</div>
             <div class="om-cell seam"><span class="om-seamdot"></span>Usage &#8594; committed / reserved compute</div>
             <div class="om-cell">Retention vs model-switching</div>
 
+            <!-- Ecosystem / Commerce -->
             <div class="om-rowlab">Ecosystem / Commerce<small>Ads · Commerce · Partners · Hardware</small></div>
             <div class="om-cell">Advertiser / merchant / partner onboarding</div>
             <div class="om-cell">First ad spend · GMV · partner deal</div>
@@ -77,25 +199,27 @@
           </div>
         </div>
 
+        <!-- RIGHT: the instances (what explodes) -->
         <div class="om-panel">
-          <p class="om-kicker">What explodes &mdash; the instance surface</p>
+          <p class="om-kicker">What explodes &mdash; the decision surface</p>
           <div class="om-panel-h">
-            <div class="om-count om-count-bright">millions</div>
-            <div class="om-count-lab">live motion instances in flight at once</div>
+            <div class="om-count" style="color:var(--green-bright)">900M+</div>
+            <div class="om-count-lab">weekly active accounts<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different lifecycle state</div>
           </div>
           <div class="om-rule"></div>
 
           <div class="om-stack">
             <div class="om-mult"><span class="v">~20</span><span class="d"><b>clubbed templates</b> &mdash; stable; barely changes quarter to quarter</span></div>
             <div class="om-mult"><span class="x">&times;</span><span class="v">28+</span><span class="d"><b>products / surfaces</b> &mdash; ~3&times; the SKUs of 2024, new launches almost weekly</span></div>
-            <div class="om-mult"><span class="x">&times;</span><span class="v">N</span><span class="d"><b>logged-in accounts</b> &mdash; each in a different segment, lifecycle stage &amp; state</span></div>
+            <div class="om-mult"><span class="x">&times;</span><span class="v">900M+</span><span class="d"><b>weekly actives</b> · 50M+ paid · 1M+ business accounts<sup style="font-size:8px;color:var(--ink-soft)">1</sup> &mdash; each in a different segment &amp; lifecycle state</span></div>
           </div>
 
           <div class="spacer"></div>
-          <div class="om-explode"><b>The template count is small. The instance count is the problem.</b> No human team hand-runs the right motion, on the right surface, for the right account, at the right moment &mdash; agentic systems instantiate it. That&#8217;s the mandate of the <b>GTM Growth PM, Agentic Systems</b>.</div>
+          <div class="om-explode"><b>The template count is small and stable. The decision surface isn&#8217;t.</b> Run ~20 plays against a weekly-growing product surface and a 900M-account base sitting in millions of different states, and the live &ldquo;should this motion fire, for this account, right now?&rdquo; decisions outrun any human team. Agentic systems instantiate and arbitrate them &mdash; the mandate of the <b>GTM Growth PM, Agentic Systems</b>.</div>
         </div>
       </div>
 
+      <!-- ARBITRATION: priorities are not a multiplier -->
       <div class="om-arb">
         <div class="om-arb-l">
           <p class="om-kicker">9 strategic priorities &mdash; the arbitration layer</p>
@@ -116,7 +240,7 @@
 
       <div class="om-tie"><b>Why this role exists:</b> the plays are clubbed and finite (~20), but the instances &mdash; surfaces &times; accounts &times; state &mdash; grow faster than any team can staff. Agentic GTM systems instantiate and arbitrate them; a PM owns the templates, the arbitration logic, and the eval harness that keeps it honest.</div>
 
-      <div class="src">Reconstructed from public sources, June 2026 &mdash; not an official OpenAI artifact. Segment, stage and template counts are an analyst&#8217;s model of how the motions club together, assembled from announcements, pricing tiers, vendor case studies and reporting; OpenAI does not publish an official orchestration count.</div>
+      <div class="src"><b>1</b> &mdash; Base figures are from public reporting: 800M weekly actives (Sam Altman / TechCrunch, Oct 2025), 900M+ weekly actives (Reuters, Jun 2026), 50M+ paying consumer subscribers and 1M+ business customers (OpenAI). &nbsp;Reconstructed June 2026 &mdash; not an official OpenAI artifact. Segment, stage and template counts are an analyst&#8217;s model of how the motions club together; OpenAI does not publish an official motion or next-best-action count, so the resulting <em>decision surface</em> is an implied estimate built on the sourced base figures &mdash; not an OpenAI-published metric.</div>
     </div>
 
     <div class="slide panel-view" id="stack" hidden>
