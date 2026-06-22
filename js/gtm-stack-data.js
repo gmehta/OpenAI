@@ -1,64 +1,94 @@
 /* OpenAI GTM Stack v2 — graph data extracted from openai-gtm-stack-v2.drawio */
 (function (root) {
-  var S = 0.85;
+  var S = 0.78;
+  var COL_W = 218;
+  var COL_GAP = 105;
+  var COL_X0 = 95;
+  var NODE_H = 66;
+  var ROW_GAP = 58;
+  var LANE_PAD = 52;
+
+  function colX(index) {
+    return COL_X0 + index * (COL_W + COL_GAP);
+  }
 
   function center(x, y, w, h) {
     return { x: (x + w / 2) * S, y: (y + h / 2) * S };
   }
 
-  function size(w, h) {
-    return { width: w * S, height: h * S };
-  }
-
   var swimlanes = [
-    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 110, w: 1500, h: 120, tone: 'neutral' },
-    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 250, w: 1500, h: 120, tone: 'neutral' },
-    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 390, w: 1500, h: 110, tone: 'crm' },
-    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 520, w: 1500, h: 210, tone: 'ai' },
-    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 750, w: 1500, h: 120, tone: 'neutral' },
-    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 890, w: 1500, h: 130, tone: 'neutral' }
+    { id: 'p1', label: 'DEMAND · DATA · MARKETING', x: 40, y: 90, w: 1580, h: 140, tone: 'neutral' },
+    { id: 'p2', label: 'INBOUND AI · ENRICHMENT · ROUTING', x: 40, y: 288, w: 1580, h: 140, tone: 'neutral' },
+    { id: 'p3', label: 'CRM — SYSTEM OF RECORD', x: 40, y: 486, w: 1580, h: 130, tone: 'crm' },
+    { id: 'p4', label: 'AI-NATIVE INTERNAL GTM LAYER  (what this role owns / builds)', x: 40, y: 674, w: 1580, h: 250, tone: 'ai' },
+    { id: 'p5', label: 'ENGAGEMENT · CONVERSATION INTELLIGENCE', x: 40, y: 982, w: 1580, h: 140, tone: 'neutral' },
+    { id: 'p6', label: 'QUOTE-TO-CASH · CONTRACTS · ANALYTICS', x: 40, y: 1180, w: 1580, h: 150, tone: 'neutral' }
   ];
 
+  function laneNodeY(laneIndex) {
+    return swimlanes[laneIndex].y + LANE_PAD;
+  }
+
   var nodes = [
-    { id: 'inbound_demand', category: 'confirmed', panel: 'p1', geom: [90, 145, 260, 70],
+    { id: 'inbound_demand', category: 'confirmed', panel: 'p1',
+      geom: [colX(0), laneNodeY(0), COL_W, NODE_H],
       label: 'Inbound Demand', sub: 'Web forms · ChatGPT Enterprise/Business signups' },
-    { id: 'mktg', category: 'likely', panel: 'p1', geom: [450, 145, 260, 70],
+    { id: 'mktg', category: 'likely', panel: 'p1',
+      geom: [colX(1), laneNodeY(0), COL_W, NODE_H],
       label: 'Marketing Automation', sub: 'HubSpot (reported)' },
-    { id: 'zoominfo', category: 'likely', panel: 'p1', geom: [810, 145, 260, 70],
+    { id: 'zoominfo', category: 'likely', panel: 'p1',
+      geom: [colX(2), laneNodeY(0), COL_W, NODE_H],
       label: 'ZoomInfo', sub: 'B2B data / GTM context graph' },
-    { id: 'codex', category: 'surface', panel: 'p1', geom: [1170, 145, 260, 70],
+    { id: 'codex', category: 'surface', panel: 'p1',
+      geom: [colX(3), laneNodeY(0), COL_W, NODE_H],
       label: 'Codex for Work', sub: 'Surface · Sales plugin · ZoomInfo + Clay apps' },
-    { id: 'inbound_ai', category: 'ai-native', panel: 'p2', geom: [90, 285, 260, 70],
+    { id: 'inbound_ai', category: 'ai-native', panel: 'p2',
+      geom: [colX(0), laneNodeY(1), COL_W, NODE_H],
       label: 'Inbound Sales Assistant', sub: 'internal "TailorAssist" · auto-responds, qualifies, hands off' },
-    { id: 'clay', category: 'confirmed', panel: 'p2', geom: [450, 285, 260, 70],
+    { id: 'clay', category: 'confirmed', panel: 'p2',
+      geom: [colX(1), laneNodeY(1), COL_W, NODE_H],
       label: 'Clay', sub: 'Enrichment · account research (RevOps + Sales)' },
-    { id: 'leandata', category: 'confirmed', panel: 'p2', geom: [810, 285, 260, 70],
+    { id: 'leandata', category: 'confirmed', panel: 'p2',
+      geom: [colX(2), laneNodeY(1), COL_W, NODE_H],
       label: 'LeanData', sub: 'Lead-to-account routing (native to Salesforce)' },
-    { id: 'salesforce', category: 'hub', panel: 'p3', geom: [540, 410, 500, 70],
+    { id: 'salesforce', category: 'hub', panel: 'p3',
+      geom: [colX(1) - 40, laneNodeY(2), COL_W * 2 + COL_GAP + 80, NODE_H + 4],
       label: 'Salesforce', sub: 'Core CRM · System of Record · (Agentforce 360 ↔ ChatGPT)' },
-    { id: 'kb', category: 'ai-native', panel: 'p4', geom: [100, 550, 240, 80], shape: 'barrel',
+    { id: 'kb', category: 'ai-native', panel: 'p4',
+      geom: [colX(0), laneNodeY(3), COL_W, NODE_H + 8], shape: 'barrel',
       label: 'Knowledge Base / Connectors', sub: 'Docs · policies · playbooks · customer stories' },
-    { id: 'gtm_assistant', category: 'ai-native', panel: 'p4', geom: [450, 550, 260, 70],
+    { id: 'gtm_assistant', category: 'ai-native', panel: 'p4',
+      geom: [colX(1), laneNodeY(3), COL_W, NODE_H],
       label: 'GTM Assistant', sub: 'Briefs · recaps · product Q&A · CRM writeback' },
-    { id: 'docugpt', category: 'ai-native', panel: 'p4', geom: [810, 550, 260, 70],
+    { id: 'docugpt', category: 'ai-native', panel: 'p4',
+      geom: [colX(2), laneNodeY(3), COL_W, NODE_H],
       label: 'DocuGPT', sub: 'Contracts → searchable structured data' },
-    { id: 'slack', category: 'surface', panel: 'p4', geom: [1170, 550, 260, 70],
+    { id: 'slack', category: 'surface', panel: 'p4',
+      geom: [colX(3), laneNodeY(3), COL_W, NODE_H],
       label: 'Slack', sub: 'Primary delivery surface' },
-    { id: 'openai_core', category: 'platform', panel: 'p4', geom: [100, 650, 970, 55],
+    { id: 'openai_core', category: 'platform', panel: 'p4',
+      geom: [colX(0), laneNodeY(3) + NODE_H + 36, COL_W * 3 + COL_GAP * 2, 54],
       label: 'OpenAI Models / API · AgentKit · internal Automation Platform · eval loops', sub: '' },
-    { id: 'gong', category: 'likely', panel: 'p5', geom: [90, 785, 260, 70],
+    { id: 'gong', category: 'likely', panel: 'p5',
+      geom: [colX(0), laneNodeY(4), COL_W, NODE_H],
       label: 'Gong', sub: 'Conversation intelligence · call notes (inferred)' },
-    { id: 'outreach', category: 'likely', panel: 'p5', geom: [450, 785, 280, 70],
+    { id: 'outreach', category: 'likely', panel: 'p5',
+      geom: [colX(1), laneNodeY(4), COL_W + 20, NODE_H],
       label: 'Outreach', sub: 'Sales engagement · MCP Server ↔ ChatGPT (Feb 2026); internal use unconfirmed' },
-    { id: 'nue', category: 'confirmed', panel: 'p6', geom: [70, 925, 250, 75],
+    { id: 'nue', category: 'confirmed', panel: 'p6',
+      geom: [colX(0) - 10, laneNodeY(5), 200, NODE_H + 6],
       label: 'Nue', sub: 'CPQ / lead-to-quote · Salesforce-native · subs + usage billing' },
-    { id: 'stripe', category: 'likely', panel: 'p6', geom: [360, 925, 250, 75],
+    { id: 'stripe', category: 'likely', panel: 'p6',
+      geom: [colX(0) + 200 + 72, laneNodeY(5), 200, NODE_H + 6],
       label: 'Stripe', sub: 'Payments rails · Agentic Commerce Protocol' },
-    { id: 'snowflake', category: 'likely', panel: 'p6', geom: [650, 925, 250, 75],
+    { id: 'snowflake', category: 'likely', panel: 'p6',
+      geom: [colX(1), laneNodeY(5), 200, NODE_H + 6],
       label: 'Snowflake', sub: 'Data Cloud / warehouse ($200M partnership)' },
-    { id: 'attribution', category: 'unconfirmed', panel: 'p6', geom: [940, 925, 250, 75],
+    { id: 'attribution', category: 'unconfirmed', panel: 'p6',
+      geom: [colX(2), laneNodeY(5), 200, NODE_H + 6],
       label: 'Attribution', sub: 'JD category (vendor unconfirmed)' },
-    { id: 'ironclad', category: 'confirmed', panel: 'p6', geom: [1230, 925, 250, 75],
+    { id: 'ironclad', category: 'confirmed', panel: 'p6',
+      geom: [colX(3), laneNodeY(5), 200, NODE_H + 6],
       label: 'Ironclad', sub: 'Contract Lifecycle Mgmt (CLM) · eSign · Salesforce-integrated' }
   ];
 
@@ -112,7 +142,7 @@
     var ty = tgt.geom[1] + tgt.geom[3] / 2;
     var dx = tx - sx;
     var dy = ty - sy;
-    if (Math.abs(dy) <= 40 && Math.abs(dx) > 80) return { taxi: 'horizontal' };
+    if (Math.abs(dy) <= 55 && Math.abs(dx) > 90) return { taxi: 'horizontal' };
     return { taxi: 'vertical' };
   }
 
@@ -121,7 +151,6 @@
 
     swimlanes.forEach(function (lane) {
       var pos = center(lane.x, lane.y, lane.w, lane.h);
-      var dim = size(lane.w, lane.h);
       elements.push({
         group: 'nodes',
         data: {

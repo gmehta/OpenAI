@@ -39,26 +39,29 @@
         selector: 'node.swimlane',
         style: {
           shape: 'rectangle',
-          'background-color': '#FAFAFA',
-          'border-color': '#E5E5E5',
+          'background-color': '#F7F7F7',
+          'background-opacity': 0.35,
+          'border-color': '#D8D8D8',
           'border-width': 1,
-          color: '#B0B0B0',
+          color: '#888888',
           'font-size': 10,
+          'font-weight': 600,
           'font-style': 'italic',
           'text-valign': 'top',
           'text-halign': 'left',
           'text-margin-y': 10,
           'text-margin-x': 12,
-          'z-index': 0
+          'z-index': 0,
+          'events': 'no'
         }
       },
       {
         selector: 'node.swimlane[tone = "crm"]',
-        style: { 'background-color': '#F4FBF8', 'border-color': '#CDE8DE', color: '#8FB8AC' }
+        style: { 'background-color': '#F4FBF8', 'background-opacity': 0.35, 'border-color': '#CDE8DE', color: '#8FB8AC' }
       },
       {
         selector: 'node.swimlane[tone = "ai"]',
-        style: { 'background-color': '#F1F8F5', 'border-color': '#CDE8DE', color: '#6FAE9C' }
+        style: { 'background-color': '#F1F8F5', 'background-opacity': 0.35, 'border-color': '#CDE8DE', color: '#6FAE9C' }
       },
       {
         selector: 'node.system',
@@ -108,16 +111,16 @@
           'text-margin-y': -10,
           'curve-style': 'taxi',
           'taxi-direction': 'data(taxi)',
-          'taxi-turn': 28,
-          'taxi-turn-min-distance': 10,
-          'taxi-radius': 8,
+          'taxi-turn': 32,
+          'taxi-turn-min-distance': 14,
+          'taxi-radius': 10,
           'source-endpoint': 'outside-to-node',
           'target-endpoint': 'outside-to-node',
-          'source-distance-from-node': 4,
-          'target-distance-from-node': 4,
+          'source-distance-from-node': 8,
+          'target-distance-from-node': 8,
           'target-arrow-shape': 'triangle',
-          'arrow-scale': 1.4,
-          width: 4.5,
+          'arrow-scale': 1.5,
+          width: 5,
           opacity: 1,
           'line-opacity': 1,
           'line-cap': 'round',
@@ -143,7 +146,7 @@
           'line-color': '#1A7F64',
           'target-arrow-color': '#1A7F64',
           color: '#0B3D2E',
-          width: 4.5,
+          width: 5,
           'line-style': 'solid'
         }
       },
@@ -153,7 +156,7 @@
           'line-color': '#13855F',
           'target-arrow-color': '#13855F',
           color: '#0B3D2E',
-          width: 4,
+          width: 4.5,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -164,7 +167,7 @@
           'line-color': '#C8911A',
           'target-arrow-color': '#C8911A',
           color: '#7A5E12',
-          width: 3.5,
+          width: 4,
           'line-style': 'dashed',
           'line-dash-pattern': [8, 5]
         }
@@ -175,7 +178,7 @@
           'line-color': '#757575',
           'target-arrow-color': '#757575',
           color: '#555555',
-          width: 3,
+          width: 3.5,
           'line-style': 'dashed',
           'line-dash-pattern': [4, 4]
         }
